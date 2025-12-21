@@ -1,0 +1,536 @@
+[
+  {
+    "id": "1",
+    "category": "Cookies",
+    "name": "Cookie-Dough-Filled Soft Baked Cookie Monster",
+    "price": 125000,
+    "description": "Soft cookie dengan wangi manis vanila, tekstur bagian luar lebih kering & bagian tengah soft",
+    "components": "Edible chocolate chip cookie dough filling, blue cookie dough, baking perfectly round cookies",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C1.png",
+    "badge": null
+  },
+  {
+    "id": "2",
+    "category": "Cookies",
+    "name": "Levain Bakery Style Classic Walnut-Chocolate Chip Cookie",
+    "price": 125000,
+    "description": "BEST SELLER. Giant soft cookie, crunchy crust, gooey centers. Premium chocolate + tekstur dari walnuts. Lengkap dengan materi Gluten Free",
+    "components": "-",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C2.png",
+    "badge": "Best Seller"
+  },
+  {
+    "id": "3",
+    "category": "Cookies",
+    "name": "OG Brown Butter Chocolate Chunk Cookie 2 Ways: Classic Chewy & Thin-Crinkly",
+    "price": 175000,
+    "description": "BEST SELLER. Chewy, nutty, sweet and savory, 1 flavor yang dapat dibuat menjadi 2 bentuk dengan cara berbeda: classic chewy cookie atau thin cookie (gepeng)",
+    "components": "-",
+    "facilities": [
+      "📺 Video Guide",
+      "🧾 Tabel Perbandingan Resep",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C3.png",
+    "badge": "Best Seller"
+  },
+  {
+    "id": "4",
+    "category": "Cookies",
+    "name": "Crunchy Bite-Sized Chocolate Chip Cookies: Classic & Double-Chocolate-Salted-Caramel",
+    "price": 125000,
+    "description": "BEST SELLER. Light, crunchy, brittle, tahan lama untuk penyimpanan jangka panjang",
+    "components": "Cookie dough 2 versi: Classic & Double Chocolate, Salted Caramel Sauce (versatile). Lengkap dengan materi Gluten Free",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C4.png",
+    "badge": "Best Seller"
+  },
+  {
+    "id": "5",
+    "category": "Cookies",
+    "name": "Cream-Cheese-Filled Red Velvet Crinkle Cookie",
+    "price": 125000,
+    "description": "Tangy, tender crumbs, red velvet cake in a cookie, crunchy crinkle crust. Dapat dimodifikasikan menjadi crinkle cookie polos (tanpa filling)",
+    "components": "Red velvet cookie dough (tanpa perisa/pasta), cream cheese filling",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C5.png",
+    "badge": null
+  },
+  {
+    "id": "6",
+    "category": "Cookies",
+    "name": "Caramelized White Chocolate Cookie: Matcha & Cocoa",
+    "price": 125000,
+    "description": "No-mixer recipe, soft baked cookie dengan tekstur moist chewy centers & crunchy crust. Base adonan dapat digunakan untuk modifikasi dengan mengganti topping",
+    "components": "Caramelized white chocolate (dari white chocolate biasa, versatile), adonan base rasa matcha & deep cocoa",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C6.png",
+    "badge": null
+  },
+  {
+    "id": "7",
+    "category": "Cookies",
+    "name": "Chocolate Peppermint Marshmallow Cookie",
+    "price": 125000,
+    "description": "Christmas Flavors. Chewy, minty flavor, brownie-like crumbs dengan isian marshmallow",
+    "components": "-",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C7.png",
+    "badge": null
+  },
+  {
+    "id": "8",
+    "category": "Cookies",
+    "name": "Maple-Glazed Gingerbread Crinkle Cookie",
+    "price": 125000,
+    "description": "Soft, cakey, warm, wangi rempah",
+    "components": "Gingerbread cookie dough, maple glaze",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C8.png",
+    "badge": null
+  },
+  {
+    "id": "9",
+    "category": "Cookies",
+    "name": "Classic Chocolate Chip Chewy Oatmeal Cookie",
+    "price": 125000,
+    "description": "Gluten-Free Series. Chewy, gluten-free, bertekstur dengan topping rolled oats. Bisa dikreasikan dengan menambahkan berbagai topping lain. Tersedia takaran untuk tepung terigu biasa (regular)",
+    "components": "-",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C9.png",
+    "badge": null
+  },
+  {
+    "id": "10",
+    "category": "Cookies",
+    "name": "Dark Chocolate Almond Oatmeal Bark & Brittle Cracker",
+    "price": 150000,
+    "description": "Gluten-Free Series. Dapat dibuat menjadi 2 tekstur: chewy atau crunchy brittle, atau menjadi kue kering (cut-out cracker style). Tersedia takaran untuk tepung terigu biasa (regular)",
+    "components": "-",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C10.png",
+    "badge": null
+  },
+  {
+    "id": "11",
+    "category": "Cookies",
+    "name": "Assorted Peanut Butter Cookies",
+    "price": 175000,
+    "description": "Gluten-Free Series. Thumbprint & Crisscross: crunchy, tahan lama. Bars: fudgy, dikonsumsi dingin. Tersedia takaran untuk tepung terigu biasa (regular)",
+    "components": "Gluten-free Peanut Butter Cookie Dough, dapat dibuat menjadi 3 jenis cookie: Thumbprint Peanut Butter & Jelly, Classic Crisscross, dan Peanut Butter & Jelly Chocolate Bars",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C11.png",
+    "badge": null
+  },
+  {
+    "id": "12",
+    "category": "Cookies",
+    "name": "Assorted Savory Cookies",
+    "price": 150000,
+    "description": "Gluten-Free Series. Eggless recipe, renyah & gurih, tahan lama. Tersedia takaran untuk tepung terigu biasa (regular)",
+    "components": "Better Butter, 3 Cheese & Green Onion, Parmesan Garlic & Herbs Cookie",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C12.png",
+    "badge": null
+  },
+  {
+    "id": "13",
+    "category": "Cookies",
+    "name": "Chewy Banana Cookie & Classic Banana Bread",
+    "price": 125000,
+    "description": "Gluten-Free Series, no-mixer recipe. Tekstur cookie padat & chewy. Tekstur banana bread padat & moist. Tersedia takaran untuk tepung terigu biasa (regular)",
+    "components": "Chewy banana cookie, cheesecake brûlée topping, classic banana bread",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C13.png",
+    "badge": null
+  },
+  {
+    "id": "14",
+    "category": "Cookies",
+    "name": "Assorted Cookie Sandwiches",
+    "price": 125000,
+    "description": "No-mixer recipe. Crunchy kering dan tahan lama. Lengkap dengan opsi Gluten-Free dan Regular",
+    "components": "Dark Chocolate Orange Sandwich Cookie, Matcha Black Sesame Sandwich Cookie, Hojicha White Chocolate Sandwich Cookie",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C14.png",
+    "badge": null
+  },
+  {
+    "id": "15",
+    "category": "Cookies",
+    "name": "Dark Chocolate Mint Cream Cookie",
+    "price": 125000,
+    "description": "NEW. Lengkap dengan opsi Gluten-Free dan Regular",
+    "components": "Buttery & crunchy chocolate cookie base, mint cream filling, dark chocolate coating",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/C15.png",
+    "badge": "New"
+  },
+  {
+    "id": "16",
+    "category": "Bars & Brownies",
+    "name": "Classic Dark Chocolate Sea Salt Fudge Brownie",
+    "price": 75000,
+    "description": "Tekstur: Padat, fudge-like, deep chocolate, moist, crunchy top crust",
+    "components": "-",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/BB1.png",
+    "badge": null
+  },
+  {
+    "id": "17",
+    "category": "Bars & Brownies",
+    "name": "Red Velvet Cheesecake Marbled Fudge Bars",
+    "price": 125000,
+    "description": "Padat & fudgy, manis & asam dari baked cheesecake, disajikan dalam keadaan dingin",
+    "components": "Adonan Red Velvet fudge base (tanpa perisa/ pasta red velvet), cheesecake topping, marbling method",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/BB2.png",
+    "badge": null
+  },
+  {
+    "id": "18",
+    "category": "Bars & Brownies",
+    "name": "Gluten-Free Shiny Crusted Brownie",
+    "price": 125000,
+    "description": "BEST SELLER. Chewy Matcha White Chocolate & Dark Chocolate Brownie + Crunchy Brownie Brittle. Gluten-free chewy brownie dengan shiny crust. Tersedia takaran untuk tepung terigu biasa (regular)",
+    "components": "-",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/BB3.png",
+    "badge": "Best Seller"
+  },
+  {
+    "id": "19",
+    "category": "Breads",
+    "name": "Classic Roti Bloeder (Poolish Method)",
+    "price": 150000,
+    "description": "BEST SELLER.",
+    "components": "Poolish starter, windowpane kneading, cara handling high hydration dough, filling keju susu, cara mengisi adonan dengan filling basah dan kering",
+    "facilities": [
+      "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/BR1.png",
+    "badge": "Best Seller"
+  },
+  {
+    "id": "20",
+    "category": "Breads",
+    "name": "Milk Bread 101",
+    "price": 250000,
+    "description": "Dasar-dasar pembuatan roti, 1 adonan yang dapat dibentuk menjadi berbagai jenis roti. Cocok untuk pemula",
+    "components": "Adonan milk bread (windowpane kneading dengan mixer), rounding adonan, shaping dan pemanggangan untuk 5 macam roti (Roti manis, Kasur, Sisir, Bread bowl, Cinnamon Rolls)",
+    "facilities": [
+      "📺Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "🧾 Tabel Perhitungan Jumlah Adonan untuk Berbagai Ukuran Loyang",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/BR2.png",
+    "badge": null
+  },
+  {
+    "id": "21",
+    "category": "Breads",
+    "name": "Brioche Seaweed Floss Buns",
+    "price": 125000,
+    "description": "Soft & buttery, kombinasi asin dan manis. Adonan brioche dapat digunakan sebagai dasar untuk berbagai macam bentuk roti lainnya",
+    "components": "Express brioche dough, milky mayonnaise filling, nori floss topping",
+    "facilities": [
+      "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/BR3.png",
+    "badge": null
+  },
+  {
+    "id": "22",
+    "category": "Pastries",
+    "name": "Assorted Scones",
+    "price": 125000,
+    "description": "Buttery, flaky, moist & doughy centers, crunchy crust. No mixer recipe, tersedia opsi VEGAN. Bisa dimodifikasikan menjadi rasa lain",
+    "components": "Plain Scones, Earl Grey Scones + Vanilla Glaze, Triple Chocolate Sea Salt Scones, Bacon & Cheddar Scones",
+    "facilities": [
+      "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/PA1.png",
+    "badge": null
+  },
+  {
+    "id": "23",
+    "category": "Pastries",
+    "name": "Crunchy Cream Puffs (Choux au Craquelin)",
+    "price": 125000,
+    "description": "Lengkap dengan opsi Gluten-Free dan Regular",
+    "components": "Basic choux pastry, cookie topping, pastry cream/ vla (versatile), cream puff filling + variasi Deluxe Chocolate & Matcha",
+    "facilities": [
+      "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/PA2.png",
+    "badge": null
+  },
+  {
+    "id": "24",
+    "category": "Pastries",
+    "name": "Flaky Egg Tarts (Portuguese Egg Tart)",
+    "price": 125000,
+    "description": "Flaky, crispy, kulit berlapis-lapis dan renyah dengan filling egg custard lembut & creamy. No-mixer recipe",
+    "components": "Rough puff pastry dough (versatile), egg custard filling",
+    "facilities": [
+      "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/PA3.png",
+    "badge": null
+  },
+  {
+    "id": "25",
+    "category": "Others",
+    "name": "Red Velvet Cheesecake Pie",
+    "price": 200000,
+    "description": "Sweet & tangy, tanpa menggunakan perisa/pasta red velvet",
+    "components": "Red Velvet pie crust, no-bake cheesecake filling, nougat topping",
+    "facilities": [
+      "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/OT1.png",
+    "badge": null
+  },
+  {
+    "id": "26",
+    "category": "Others",
+    "name": "Brown Butter Chocolate Cookie Birthday Cake +\r\nCookie Bars",
+    "price": 200000,
+    "description": "Brown Butter Chocolate Cookie Birthday Cake + Cookie Bars",
+    "components": "Brown butter, brown butter cookie dough, whipped dark chocolate ganache (versatile), decoration cookie cake",
+    "facilities": [
+      "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/OT2.png",
+    "badge": null
+  },
+  {
+    "id": "28",
+    "category": "Others",
+    "name": "Classic Carrot Cake",
+    "price": 125000,
+    "description": "Lengkap dengan opsi Gluten-Free dan Regular",
+    "components": "Classic Carrot Cake, almond crumble topping, brown butter cream cheese frosting",
+    "facilities": [
+      "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/OT3.png",
+    "badge": null
+  },
+  {
+    "id": "29",
+    "category": "Others",
+    "name": "Basque Cheesecake",
+    "price": 125000,
+    "description": "NEW. Naturally Gluten-Free, tidak menggunakan tepung. No-mixer recipe",
+    "components": "Classic Basque Cheesecake, Lotus Biscoff Basque Cheesecake",
+    "facilities": [
+      "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/OT4.png",
+    "badge": "New"
+  },
+  {
+    "id": "30",
+    "category": "Others",
+    "name": "Classic Tiramisu & Matchamisu",
+    "price": 150000,
+    "description": "NEW. Lengkap dengan opsi Gluten-Free dan Regular",
+    "components": "Ladyfingers from scratch, mascarpone cream filling, assembly",
+    "facilities": [
+      "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi",
+      "merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/OT5.png",
+    "badge": "New"
+  }
+]
