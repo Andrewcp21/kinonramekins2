@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Course } from '@/types';
 import CourseCard from './CourseCard';
 import CategoryFilter from './CategoryFilter';
@@ -8,7 +9,9 @@ import ProductModal from './ProductModal';
 import coursesData from '@/data/courses.json';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function CourseGrid() {
+function CourseGridContent() {
+    const searchParams = useSearchParams();
+    const router = useRouter();
     const [activeCategory, setActiveCategory] = useState('Cookies');
     const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
@@ -18,6 +21,58 @@ export default function CourseGrid() {
         const order = ['Cookies', 'Breads', 'Pastries', 'Bars & Brownies', 'Others'];
         return order.filter(c => cats.has(c));
     }, []);
+
+    // Handle direct link via query param
+    useEffect(() => {
+        const classId = searchParams.get('class');
+        const categoryParam = searchParams.get('category');
+
+        if (classId) {
+            const course = coursesData.find(c => c.id === classId);
+            if (course) {
+                setSelectedCourse(course as Course);
+                setActiveCategory(course.category);
+
+                // Scroll to courses section
+                const element = document.getElementById('courses');
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        } else if (categoryParam) {
+            // Check if the category exists in our categories list
+            const matchedCategory = categories.find(
+                c => c.toLowerCase() === categoryParam.toLowerCase()
+            );
+            if (matchedCategory) {
+                setActiveCategory(matchedCategory);
+                // Scroll to courses section
+                const element = document.getElementById('courses');
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+    }, [searchParams, categories]);
+
+    const handleCategorySelect = (category: string) => {
+        setActiveCategory(category);
+        // Clear query params when user manually selects a category
+        if (searchParams.get('category') || searchParams.get('class')) {
+            const params = new URLSearchParams(searchParams.toString());
+            params.delete('category');
+            params.delete('class');
+            router.push(`?${params.toString()}`, { scroll: false });
+        }
+    };
+
+    const handleCloseModal = () => {
+        setSelectedCourse(null);
+        // Clear query param without full refresh
+        const params = new URLSearchParams(searchParams.toString());
+        params.delete('class');
+        router.push(`?${params.toString()}`, { scroll: false });
+    };
 
     const filteredCourses = useMemo(() => {
         return coursesData.filter(course => course.category === activeCategory);
@@ -38,7 +93,7 @@ export default function CourseGrid() {
             <CategoryFilter
                 categories={categories}
                 activeCategory={activeCategory}
-                onSelect={setActiveCategory}
+                onSelect={handleCategorySelect}
             />
 
             <motion.div
@@ -67,8 +122,16 @@ export default function CourseGrid() {
             <ProductModal
                 course={selectedCourse}
                 isOpen={!!selectedCourse}
-                onClose={() => setSelectedCourse(null)}
+                onClose={handleCloseModal}
             />
         </section>
+    );
+}
+
+export default function CourseGrid() {
+    return (
+        <Suspense fallback={<div className="min-h-screen" />}>
+            <CourseGridContent />
+        </Suspense>
     );
 }
