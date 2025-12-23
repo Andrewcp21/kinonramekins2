@@ -88,63 +88,63 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
                             <X className="w-6 h-6" />
                         </button>
 
-                        <div className="flex-1 overflow-y-auto">
-                            <div className="flex flex-col md:flex-row min-h-full">
-                                {/* Image Section */}
-                                <div className="w-full md:w-1/2 min-h-[300px] md:min-h-0 relative bg-gray-100">
-                                    {course.image ? (
+                        <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+                            {/* Image Section - Sticky on Desktop */}
+                            <div className="w-full md:w-1/2 min-h-[300px] md:h-full relative bg-gray-100 flex items-center justify-center shrink-0">
+                                {course.image ? (
+                                    <div className="relative w-full aspect-square">
                                         <Image
                                             src={course.image}
                                             alt={course.name}
                                             fill
-                                            className="object-cover"
+                                            className="object-contain p-4"
                                         />
-                                    ) : (
-                                        <div className="flex items-center justify-center h-full text-gray-400">No Image</div>
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center justify-center h-full text-gray-400">No Image</div>
+                                )}
+                            </div>
+
+                            {/* Content Section - Scrollable on Desktop */}
+                            <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col md:overflow-y-auto">
+                                <div className="mb-2 text-gold font-bold uppercase tracking-widest text-sm">
+                                    {course.category}
+                                </div>
+
+                                <h2 className="font-headline text-2xl md:text-3xl font-medium mb-4 leading-tight">
+                                    {course.name}
+                                </h2>
+
+                                <div className="text-3xl font-bold mb-6 font-mono">
+                                    {formatPrice(course.price)}
+                                </div>
+
+                                <div className="prose prose-sm mb-6 text-gray-600">
+                                    <p>{course.description}</p>
+                                    {course.components && course.components !== '-' && (
+                                        <p className="mt-2 text-sm italic">Component: {course.components}</p>
                                     )}
                                 </div>
 
-                                {/* Content Section */}
-                                <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col">
-                                    <div className="mb-2 text-gold font-bold uppercase tracking-widest text-sm">
-                                        {course.category}
-                                    </div>
-
-                                    <h2 className="font-headline text-2xl md:text-3xl font-medium mb-4 leading-tight">
-                                        {course.name}
-                                    </h2>
-
-                                    <div className="text-3xl font-bold mb-6 font-mono">
-                                        {formatPrice(course.price)}
-                                    </div>
-
-                                    <div className="prose prose-sm mb-6 text-gray-600">
-                                        <p>{course.description}</p>
-                                        {course.components && course.components !== '-' && (
-                                            <p className="mt-2 text-sm italic">Component: {course.components}</p>
-                                        )}
-                                    </div>
-
-                                    {/* Value Stack */}
-                                    <div className="bg-gray-50 p-6 rounded-lg mb-8 border border-gray-100">
-                                        <h4 className="font-bold uppercase tracking-wider text-sm mb-4 border-b border-gray-200 pb-2">
-                                            What You Get
-                                        </h4>
-                                        <ul className="space-y-3">
-                                            {course.facilities.map((facility, idx) => (
-                                                <li key={idx} className="flex items-start gap-3 text-sm text-gray-700">
-                                                    <div className="mt-0.5 shrink-0 text-gold">
-                                                        {facility.toLowerCase().includes('video') ? <PlayCircle className="w-4 h-4" /> :
-                                                            facility.toLowerCase().includes('resep') ? <FileText className="w-4 h-4" /> :
-                                                                facility.toLowerCase().includes('trouble') ? <Settings className="w-4 h-4" /> :
-                                                                    facility.toLowerCase().includes('group') ? <Users className="w-4 h-4" /> :
-                                                                        <Check className="w-4 h-4" />}
-                                                    </div>
-                                                    <span>{facility}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                {/* Value Stack */}
+                                <div className="bg-gray-50 p-6 rounded-lg mb-8 border border-gray-100">
+                                    <h4 className="font-bold uppercase tracking-wider text-sm mb-4 border-b border-gray-200 pb-2">
+                                        What You Get
+                                    </h4>
+                                    <ul className="space-y-3">
+                                        {course.facilities.map((facility, idx) => (
+                                            <li key={idx} className="flex items-start gap-3 text-sm text-gray-700">
+                                                <div className="mt-0.5 shrink-0 text-gold">
+                                                    {facility.toLowerCase().includes('video') ? <PlayCircle className="w-4 h-4" /> :
+                                                        facility.toLowerCase().includes('resep') ? <FileText className="w-4 h-4" /> :
+                                                            facility.toLowerCase().includes('trouble') ? <Settings className="w-4 h-4" /> :
+                                                                facility.toLowerCase().includes('group') ? <Users className="w-4 h-4" /> :
+                                                                    <Check className="w-4 h-4" />}
+                                                </div>
+                                                <span>{facility}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
                             </div>
                         </div>
