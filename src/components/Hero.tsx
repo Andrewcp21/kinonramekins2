@@ -25,7 +25,7 @@ export default function Hero() {
                     Online Baking Class
                 </div>
 
-                <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+                <h1 className="font-headline text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
                     Bikin Kue Enak & Cantik <br />
                     <span className="text-amber-600">
                         Gak Pake Ribet!

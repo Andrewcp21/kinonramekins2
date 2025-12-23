@@ -33,7 +33,7 @@ export default function FavoritesVideoSection() {
                     <span className="text-amber-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block">
                         Our Highlights
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-serif font-bold text-amber-950">
+                    <h2 className="text-4xl md:text-5xl font-headline font-bold text-amber-950">
                         Most Favorites Menu
                     </h2>
                     <div className="h-1 w-20 bg-amber-600 mx-auto mt-6 rounded-full" />
@@ -62,7 +62,7 @@ export default function FavoritesVideoSection() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
 
                                 <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500">
-                                    <h3 className="text-white text-xl md:text-2xl font-serif font-bold leading-tight">
+                                    <h3 className="text-white text-xl md:text-2xl font-headline font-bold leading-tight">
                                         {item.title}
                                     </h3>
                                     <div className="h-0.5 w-0 group-hover:w-full bg-amber-400 transition-all duration-500 mt-2" />

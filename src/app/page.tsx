@@ -13,8 +13,8 @@ export default function Home() {
       </Suspense>
 
       <Hero />
-      <FavoritesVideoSection />
       <CourseGrid />
+      <FavoritesVideoSection />
 
       <ReviewsSection />
 

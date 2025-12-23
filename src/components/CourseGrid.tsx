@@ -26,7 +26,7 @@ export default function CourseGrid() {
     return (
         <section className="py-20 px-4 max-w-7xl mx-auto" id="courses">
             <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-serif font-medium mb-4">
+                <h2 className="text-4xl md:text-5xl font-headline font-medium mb-4">
                     Pilihan Kelas
                 </h2>
                 <p className="text-gray-500 max-w-2xl mx-auto">

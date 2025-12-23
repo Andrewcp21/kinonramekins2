@@ -108,7 +108,7 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
                                 {course.category}
                             </div>
 
-                            <h2 className="font-serif text-2xl md:text-3xl font-medium mb-4 leading-tight">
+                            <h2 className="font-headline text-2xl md:text-3xl font-medium mb-4 leading-tight">
                                 {course.name}
                             </h2>
 

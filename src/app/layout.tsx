@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Fredoka } from "next/font/google";
+import { Poppins, Playfair_Display, Fredoka } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import MetaPixel from "@/components/MetaPixel";
 
-const inter = Inter({
-  variable: "--font-inter",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const playfair = Playfair_Display({
@@ -32,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${playfair.variable} ${fredoka.variable} antialiased font-sans`}
+        className={`${poppins.variable} ${playfair.variable} ${fredoka.variable} antialiased font-sans`}
       >
         <Suspense fallback={null}>
           <MetaPixel />

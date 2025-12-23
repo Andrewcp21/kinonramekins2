@@ -30,7 +30,7 @@ export default function ReviewsSection() {
     return (
         <section className="py-20 bg-gray-50 overflow-hidden" id="reviews">
             <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
-                <h2 className="text-4xl md:text-5xl font-serif font-medium mb-4">
+                <h2 className="text-4xl md:text-5xl font-headline font-medium mb-4">
                     Kata Alumni
                 </h2>
                 <p className="text-gray-500 max-w-2xl mx-auto">
