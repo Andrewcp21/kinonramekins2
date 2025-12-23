@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
 const favorites = [
     {
@@ -25,6 +26,65 @@ const favorites = [
     }
 ];
 
+function VideoItem({ item, index }: { item: typeof favorites[0], index: number }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [isInView, setIsInView] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsInView(true);
+                    observer.unobserve(entry.target);
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+
+        return () => {
+            if (videoRef.current) {
+                observer.unobserve(videoRef.current);
+            }
+        };
+    }, []);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className={`group relative overflow-hidden rounded-2xl bg-amber-50 shadow-xl shadow-amber-900/5 ${index >= 3 ? 'lg:col-span-1.5' : ''
+                }`}
+        >
+            <div className="aspect-[9/16] md:aspect-square relative overflow-hidden">
+                <video
+                    ref={videoRef}
+                    src={isInView ? item.video : undefined}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+
+                <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500">
+                    <h3 className="text-white text-xl md:text-2xl font-headline font-bold leading-tight">
+                        {item.title}
+                    </h3>
+                    <div className="h-0.5 w-0 group-hover:w-full bg-amber-400 transition-all duration-500 mt-2" />
+                </div>
+            </div>
+        </motion.div>
+    );
+}
+
 export default function FavoritesVideoSection() {
     return (
         <section className="py-20 px-6 bg-white overflow-hidden">
@@ -41,34 +101,7 @@ export default function FavoritesVideoSection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {favorites.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            className={`group relative overflow-hidden rounded-2xl bg-amber-50 shadow-xl shadow-amber-900/5 ${index >= 3 ? 'lg:col-span-1.5' : ''
-                                }`}
-                        >
-                            <div className="aspect-[9/16] md:aspect-square relative overflow-hidden">
-                                <video
-                                    src={item.video}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
-
-                                <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500">
-                                    <h3 className="text-white text-xl md:text-2xl font-headline font-bold leading-tight">
-                                        {item.title}
-                                    </h3>
-                                    <div className="h-0.5 w-0 group-hover:w-full bg-amber-400 transition-all duration-500 mt-2" />
-                                </div>
-                            </div>
-                        </motion.div>
+                        <VideoItem key={index} item={item} index={index} />
                     ))}
                 </div>
             </div>
