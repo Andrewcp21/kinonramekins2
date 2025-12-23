@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Course } from '@/types';
 import CourseCard from './CourseCard';
 import CategoryFilter from './CategoryFilter';
@@ -81,6 +82,18 @@ function CourseGridContent() {
     return (
         <section className="py-20 px-4 max-w-7xl mx-auto" id="courses">
             <div className="text-center mb-16">
+                {/* Logo */}
+                <div className="mb-6 relative w-48 h-20 md:w-64 md:h-24 mx-auto">
+                    <Image
+                        src="/images/logo3.png"
+                        alt="Kinonramekins Logo"
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 192px, 256px"
+                        priority
+                    />
+                </div>
+
                 <h2 className="text-4xl md:text-5xl font-headline font-medium mb-4">
                     Pilihan Kelas
                 </h2>

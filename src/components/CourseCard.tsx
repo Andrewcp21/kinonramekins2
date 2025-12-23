@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Course } from '@/types';
-import { BadgeCheck, Sparkles } from 'lucide-react';
+import { BadgeCheck, Sparkles, MessageCircle } from 'lucide-react';
 
 interface CourseCardProps {
     course: Course;
@@ -14,6 +14,27 @@ export default function CourseCard({ course, onClick }: CourseCardProps) {
             currency: 'IDR',
             minimumFractionDigits: 0,
         }).format(price);
+    };
+
+    const getWhatsappLink = (course: Course) => {
+        const message = `Halo, saya tertarik dengan kelas ${course.name}. Boleh minta info lebih lanjut?`;
+        return `https://wa.me/6289522453978?text=${encodeURIComponent(message)}`;
+    };
+
+    const handleWhatsAppClick = (e: React.MouseEvent) => {
+        e.stopPropagation(); // Prevent card click from triggering
+
+        // Track lead event
+        import('react-facebook-pixel')
+            .then((x) => x.default)
+            .then((ReactPixel) => {
+                ReactPixel.track('Lead', {
+                    content_name: course.name,
+                    content_category: course.category,
+                    value: course.price,
+                    currency: 'IDR'
+                });
+            });
     };
 
     return (
@@ -48,15 +69,26 @@ export default function CourseCard({ course, onClick }: CourseCardProps) {
             </div>
 
             {/* Content */}
-            <div className="p-4 flex flex-col gap-2">
+            <div className="p-4 flex flex-col gap-3">
                 <h3 className="font-serif font-medium text-lg leading-tight line-clamp-2 min-h-[3rem] group-hover:text-gold transition-colors">
                     {course.name}
                 </h3>
 
-                <div className="mt-auto flex items-center justify-between pt-2 border-t border-gray-100">
+                <div className="flex items-center justify-between pt-2 border-t border-gray-100">
                     <span className="font-bold text-lg">{formatPrice(course.price)}</span>
-                    <span className="text-xs text-gray-400 uppercase tracking-widest group-hover:text-black transition-colors">Lihat Detail</span>
                 </div>
+
+                {/* WhatsApp CTA Button */}
+                <a
+                    href={getWhatsappLink(course)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleWhatsAppClick}
+                    className="w-full bg-green-600 text-white font-bold py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-green-700 transition-colors text-xs uppercase tracking-wider shadow-md hover:shadow-lg active:scale-[0.98] transition-all"
+                >
+                    <MessageCircle className="w-4 h-4" />
+                    Order
+                </a>
             </div>
         </div>
     );

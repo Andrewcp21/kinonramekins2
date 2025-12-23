@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { MessageCircle } from 'lucide-react';
 
 const reviews = [
     "IMG_6424.jpeg",
@@ -62,13 +63,16 @@ export default function ReviewsSection() {
                 ))}
             </div>
 
-            {/* CTA Section */}
+            {/* WhatsApp CTA Section */}
             <div className="mt-12 text-center">
                 <a
-                    href="#courses"
-                    className="inline-block bg-black text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gold transition-colors duration-300"
+                    href="https://api.whatsapp.com/message/I2GYXZIM4RQMI1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 bg-green-600 text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-[0.98] uppercase tracking-wider"
                 >
-                    Lihat Pilihan Kelas
+                    <MessageCircle className="w-6 h-6" />
+                    Mulai Belajar!
                 </a>
             </div>
         </section>

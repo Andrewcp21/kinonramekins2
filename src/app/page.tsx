@@ -1,4 +1,3 @@
-import Hero from "@/components/Hero";
 import MetaPixel from "@/components/MetaPixel";
 import dynamic from 'next/dynamic';
 import { Suspense } from "react";
@@ -16,6 +15,10 @@ const ReviewsSection = dynamic(() => import("@/components/ReviewsSection"), {
   loading: () => <div className="py-20 bg-gray-50 min-h-[300px]" />,
 });
 
+const ClassIncludesSection = dynamic(() => import("@/components/ClassIncludesSection"), {
+  loading: () => <div className="py-20 bg-white min-h-[400px]" />,
+});
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-black font-sans selection:bg-gold selection:text-white">
@@ -23,8 +26,8 @@ export default function Home() {
         <MetaPixel />
       </Suspense>
 
-      <Hero />
       <CourseGrid />
+      <ClassIncludesSection />
       <FavoritesVideoSection />
       <ReviewsSection />
 
