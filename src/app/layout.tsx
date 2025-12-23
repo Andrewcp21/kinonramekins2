@@ -23,6 +23,9 @@ const fredoka = Fredoka({
 export const metadata: Metadata = {
   title: "Kinonramekins Online Baking Class",
   description: "Premium online baking classes for home bakers.",
+  icons: {
+    icon: "/images/favicon.png",
+  },
 };
 
 export default function RootLayout({
