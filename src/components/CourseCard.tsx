@@ -27,26 +27,19 @@ export default function CourseCard({ course, onClick }: CourseCardProps) {
 
         const href = e.currentTarget.href;
 
-        // Track lead event
-        try {
-            import('react-facebook-pixel')
-                .then((x) => x.default)
-                .then((ReactPixel) => {
-                    ReactPixel.track('Lead', {
-                        content_name: course.name,
-                        content_category: course.category,
-                        value: course.price,
-                        currency: 'IDR'
-                    });
-                });
-        } catch (error) {
-            console.error('Facebook Pixel tracking error:', error);
-        } finally {
-            // Open the link in a new tab after a short delay to ensure the event is sent
-            setTimeout(() => {
-                window.open(href, '_blank', 'noopener,noreferrer');
-            }, 300); // 300ms delay
-        }
+        import('@/lib/fpixel').then(fpixel => {
+            fpixel.track('Lead', {
+                content_name: course.name,
+                content_category: course.category,
+                value: course.price,
+                currency: 'IDR'
+            });
+        });
+
+        // Open the link in a new tab after a short delay
+        setTimeout(() => {
+            window.open(href, '_blank', 'noopener,noreferrer');
+        }, 300);
     };
 
     return (

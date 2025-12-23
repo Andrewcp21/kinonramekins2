@@ -10,12 +10,12 @@ export default function MetaPixel() {
     const searchParams = useSearchParams();
 
     useEffect(() => {
-        import('react-facebook-pixel')
-            .then((x) => x.default)
-            .then((ReactPixel) => {
-                ReactPixel.init(FB_PIXEL_ID);
-                ReactPixel.pageView();
-            });
+        import('@/lib/fpixel')
+            .then((fpixel) => {
+                fpixel.initPixel();
+                fpixel.pageview();
+            })
+            .catch(err => console.error('Failed to load fpixel utility', err));
     }, [pathname, searchParams]);
 
     return null;

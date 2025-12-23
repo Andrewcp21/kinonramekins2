@@ -28,6 +28,22 @@ export default function ReviewsSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollXProgress } = useScroll({ container: containerRef });
 
+    const handleCTAClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        const href = e.currentTarget.href;
+
+        import('@/lib/fpixel').then(fpixel => {
+            fpixel.track('Lead', {
+                content_name: 'General CTA - Mulai Belajar',
+                content_category: 'General',
+            });
+        });
+
+        setTimeout(() => {
+            window.open(href, '_blank', 'noopener,noreferrer');
+        }, 300);
+    };
+
     return (
         <section className="py-20 bg-gray-50 overflow-hidden" id="reviews">
             <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
@@ -69,6 +85,7 @@ export default function ReviewsSection() {
                     href="https://api.whatsapp.com/message/I2GYXZIM4RQMI1"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleCTAClick}
                     className="inline-flex items-center gap-3 bg-green-600 text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-[0.98] uppercase tracking-wider"
                 >
                     <MessageCircle className="w-6 h-6" />

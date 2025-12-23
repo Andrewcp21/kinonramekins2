@@ -52,24 +52,18 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
         e.preventDefault();
         const href = e.currentTarget.href;
 
-        try {
-            import('react-facebook-pixel')
-                .then((x) => x.default)
-                .then((ReactPixel) => {
-                    ReactPixel.track('Lead', {
-                        content_name: course.name,
-                        content_category: course.category,
-                        value: course.price,
-                        currency: 'IDR'
-                    });
-                });
-        } catch (error) {
-            console.error('Facebook Pixel tracking error:', error);
-        } finally {
-            setTimeout(() => {
-                window.open(href, '_blank', 'noopener,noreferrer');
-            }, 300);
-        }
+        import('@/lib/fpixel').then(fpixel => {
+            fpixel.track('Lead', {
+                content_name: course.name,
+                content_category: course.category,
+                value: course.price,
+                currency: 'IDR'
+            });
+        });
+
+        setTimeout(() => {
+            window.open(href, '_blank', 'noopener,noreferrer');
+        }, 300);
     };
 
     if (!course) return null;
