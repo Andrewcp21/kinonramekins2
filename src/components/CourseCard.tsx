@@ -21,20 +21,32 @@ export default function CourseCard({ course, onClick }: CourseCardProps) {
         return `https://wa.me/6289522453978?text=${encodeURIComponent(message)}`;
     };
 
-    const handleWhatsAppClick = (e: React.MouseEvent) => {
+    const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.stopPropagation(); // Prevent card click from triggering
+        e.preventDefault(); // Prevent the default link navigation
+
+        const href = e.currentTarget.href;
 
         // Track lead event
-        import('react-facebook-pixel')
-            .then((x) => x.default)
-            .then((ReactPixel) => {
-                ReactPixel.track('Lead', {
-                    content_name: course.name,
-                    content_category: course.category,
-                    value: course.price,
-                    currency: 'IDR'
+        try {
+            import('react-facebook-pixel')
+                .then((x) => x.default)
+                .then((ReactPixel) => {
+                    ReactPixel.track('Lead', {
+                        content_name: course.name,
+                        content_category: course.category,
+                        value: course.price,
+                        currency: 'IDR'
+                    });
                 });
-            });
+        } catch (error) {
+            console.error('Facebook Pixel tracking error:', error);
+        } finally {
+            // Open the link in a new tab after a short delay to ensure the event is sent
+            setTimeout(() => {
+                window.open(href, '_blank', 'noopener,noreferrer');
+            }, 300); // 300ms delay
+        }
     };
 
     return (
