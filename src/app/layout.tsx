@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Playfair_Display, Fredoka } from "next/font/google";
 import { Suspense } from "react";
+import Script from "next/script";
 import "./globals.css";
 import MetaPixel from "@/components/MetaPixel";
 
@@ -43,6 +44,15 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${playfair.variable} ${fredoka.variable} antialiased font-sans`}
       >
+                <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "uqjbv4w1e9");
+          `}
+        </Script>
         <Suspense fallback={null}>
           <MetaPixel />
         </Suspense>
