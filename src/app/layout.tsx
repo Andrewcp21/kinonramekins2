@@ -53,6 +53,15 @@ export default function RootLayout({
             })(window, document, "clarity", "script", "uqjbv4w1e9");
           `}
         </Script>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-MQ7R96HWXN" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-MQ7R96HWXN');
+          `}
+        </Script>
         <Suspense fallback={null}>
           <MetaPixel />
         </Suspense>
