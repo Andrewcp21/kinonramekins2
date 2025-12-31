@@ -92,7 +92,7 @@ export default function CourseCard({ course, onClick }: CourseCardProps) {
                     className="w-full bg-green-600 text-white font-bold py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-green-700 transition-colors text-xs uppercase tracking-wider shadow-md hover:shadow-lg active:scale-[0.98] transition-all"
                 >
                     <MessageCircle className="w-4 h-4" />
-                    Order
+                    Daftar Kelas
                 </a>
             </div>
         </div>

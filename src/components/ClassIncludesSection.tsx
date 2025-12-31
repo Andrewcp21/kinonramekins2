@@ -1,100 +1,151 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Video, FileText, Utensils, Wrench, MessageCircle } from 'lucide-react';
+import { Video, FileText, MessageCircle, CheckCircle2 } from 'lucide-react';
+import Image from 'next/image';
 
-const includes = [
+const features = [
     {
         icon: Video,
-        title: 'Video Guide',
-        description: 'Tutorial video lengkap step-by-step'
+        title: 'Video Guide Lengkap & Mudah',
+        description: 'Akses seumur hidup ke tutorial video step-by-step.',
+        images: [
+            '/images/USP Screenshot/tutorial1.png',
+            '/images/USP Screenshot/tutorial2.png',
+            '/images/USP Screenshot/tutorial3.png'
+        ],
+        benefits: [
+            'Resolusi HD jernih',
+            'Angle kamera detail',
+            'Step by step mudah diikuti'
+        ]
     },
     {
         icon: FileText,
-        title: 'List Alat dan Bahan',
-        description: 'Lengkap dengan rekomendasi merk bahan'
-    },
-    {
-        icon: Utensils,
-        title: 'Resep Tertulis',
-        description: 'Resep detail yang mudah diikuti'
-    },
-    {
-        icon: Wrench,
-        title: 'Troubleshooting Guide',
-        description: 'Solusi untuk masalah yang sering terjadi'
+        title: 'Panduan Tertulis Lengkap',
+        description: 'Modul PDF detail dan daftar supplier terpercaya.',
+        images: [
+            '/images/USP Screenshot/files1.png',
+            '/images/USP Screenshot/files2.png'
+        ],
+        benefits: [
+            'Resep anti-gagal',
+            'Tips & trik rahasia',
+            'Rekomendasi bahan & alat'
+        ]
     },
     {
         icon: MessageCircle,
-        title: 'Konsultasi via WhatsApp',
-        description: 'Tanya jawab langsung di grup eksklusif'
+        title: 'Konsultasi via Group Whatsapp!',
+        description: 'Tanya jawab langsung dengan instruktur dan komunitas.',
+        images: [
+            '/images/USP Screenshot/Grup1.jpeg',
+            '/images/USP Screenshot/Grup2.jpeg',
+            '/images/USP Screenshot/Grup3.jpeg'
+        ],
+        benefits: [
+            'Fast response mentor',
+            'Review hasil baking',
+            'Komunitas suportif'
+        ]
     }
 ];
 
 export default function ClassIncludesSection() {
     return (
-        <section className="py-20 px-4 bg-gradient-to-b from-white to-amber-50/30">
-            <div className="max-w-6xl mx-auto">
+        <section className="py-20 px-4 bg-gradient-to-b from-white to-amber-50/50 overflow-hidden">
+            <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="text-center mb-20"
                 >
-                    <h2 className="text-4xl md:text-5xl font-headline font-bold mb-4 text-amber-950">
-                        Apa yang Kamu Dapat
+                    <span className="inline-block py-1 px-3 rounded-full bg-amber-100 text-amber-800 text-sm font-semibold mb-4 border border-amber-200">
+                        ✨ Sekali Bayar, Akses Selamanya
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-headline font-bold mb-6 text-amber-950">
+                        Apa yang Kamu Dapat?
                     </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg">
-                        Semua yang kamu butuhkan untuk sukses baking dari rumah
+                    <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                        Investasi terbaik untuk hobi dan bisnis bakingmu dengan materi terlengkap.
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    {includes.map((item, index) => (
+                <div className="space-y-24">
+                    {features.map((feature, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-amber-900/5 hover:border-amber-900/20"
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.7 }}
+                            className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}
                         >
-                            {/* Icon */}
-                            <div className="mb-6 relative">
-                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                    <item.icon className="w-8 h-8 text-amber-600" strokeWidth={2} />
+                            {/* Text Content */}
+                            <div className="flex-1 space-y-8 text-center lg:text-left">
+                                <div className="space-y-4">
+                                    <div className="inline-flex items-center justify-center lg:justify-start gap-3">
+                                        <div className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 shadow-sm">
+                                            <feature.icon size={28} />
+                                        </div>
+                                        <h3 className="text-3xl font-headline font-bold text-amber-950">
+                                            {feature.title}
+                                        </h3>
+                                    </div>
+                                    <p className="text-xl text-gray-700 leading-relaxed">
+                                        {feature.description}
+                                    </p>
                                 </div>
-                                {/* Decorative element */}
-                                <div className="absolute -top-2 -right-2 w-8 h-8 bg-amber-200/30 rounded-full blur-xl group-hover:bg-amber-300/40 transition-colors duration-300" />
+
+                                <ul className="space-y-3 inline-block text-left bg-white/50 p-6 rounded-2xl border border-amber-100">
+                                    {feature.benefits.map((benefit, i) => (
+                                        <li key={i} className="flex items-center gap-3 text-gray-700 font-medium">
+                                            <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                                            {benefit}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
 
-                            {/* Content */}
-                            <h3 className="text-xl font-headline font-bold mb-2 text-amber-950">
-                                {item.title}
-                            </h3>
-                            <p className="text-gray-600 text-sm leading-relaxed">
-                                {item.description}
-                            </p>
+                            {/* Images Grid */}
+                            <div className="flex-1 w-full relative">
+                                {/* Decorative blob */}
+                                <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-amber-200/20 blur-3xl rounded-full -z-10`} />
 
-                            {/* Hover effect border */}
-                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-400/0 to-amber-600/0 group-hover:from-amber-400/5 group-hover:to-amber-600/5 transition-all duration-300 pointer-events-none" />
+                                <div className={`grid gap-4 ${feature.images.length === 3 ? 'grid-cols-2 grid-rows-2' : 'grid-cols-2'}`}>
+                                    {feature.images.map((img, imgIndex) => (
+                                        <div
+                                            key={imgIndex}
+                                            className={`relative rounded-2xl overflow-hidden shadow-xl border-4 border-white transform transition-transform duration-500 hover:scale-[1.02] 
+                                                ${feature.images.length === 3 && imgIndex === 0 ? 'row-span-2' : ''}
+                                                ${feature.images.length === 2 ? 'aspect-[4/3]' : 'aspect-square'}
+                                            `}
+                                        >
+                                            <Image
+                                                src={img}
+                                                alt={`${feature.title} screenshot ${imgIndex + 1}`}
+                                                fill
+                                                className="object-cover"
+                                                sizes="(max-width: 768px) 100vw, 50vw"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </motion.div>
                     ))}
                 </div>
 
-                {/* Bottom CTA */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                    className="text-center mt-12"
-                >
-                    <p className="text-amber-900/70 font-sans font-medium italic text-sm md:text-base">
-                        ✨ Semua materi bisa diakses selamanya, belajar sesuai ritme kamu!
-                    </p>
-                </motion.div>
+                <div className="mt-20 text-center">
+                    <button
+                        onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })}
+                        className="bg-amber-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-amber-700 transition-colors shadow-lg hover:shadow-amber-200/50"
+                    >
+                        Lihat Pilihan Kelas
+                    </button>
+                </div>
             </div>
         </section>
     );

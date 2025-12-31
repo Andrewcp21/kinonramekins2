@@ -164,10 +164,10 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
                                 className="w-full bg-green-600 text-white font-bold py-4 px-6 rounded-none flex items-center justify-center gap-2 hover:bg-green-700 transition-colors uppercase tracking-widest text-sm shadow-lg hover:shadow-xl transform active:scale-[0.98] transition-all"
                             >
                                 <MessageCircle className="w-5 h-5" />
-                                Order via WhatsApp
+                                Daftar Kelas via WhatsApp
                             </a>
                             <p className="text-center text-xs text-gray-400 mt-2">
-                                Order via WhatsApp Admin
+                                Daftar Kelas via WhatsApp Admin
                             </p>
                         </div>
                     </motion.div>
