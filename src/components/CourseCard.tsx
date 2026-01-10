@@ -81,6 +81,7 @@ export default function CourseCard({ course, onClick }: CourseCardProps) {
 
                 <div className="flex items-center justify-between pt-2 border-t border-gray-100">
                     <span className="font-bold text-lg">{formatPrice(course.price)}</span>
+                    <span className="text-gold text-sm font-medium hover:underline">Lihat Detail</span>
                 </div>
 
                 {/* WhatsApp CTA Button */}

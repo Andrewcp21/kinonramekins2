@@ -80,27 +80,23 @@ function CourseGridContent() {
     }, [activeCategory]);
 
     return (
-        <section className="py-20 px-4 max-w-7xl mx-auto" id="courses">
-            <div className="text-center mb-16">
+        <section className="pt-10 pb-20 px-4 max-w-7xl mx-auto" id="courses">
+            <div className="text-center mb-8">
                 {/* Logo */}
-                <div className="mb-6 relative w-48 h-20 md:w-64 md:h-24 mx-auto">
+                <div className="mb-4 relative w-32 h-14 md:w-40 md:h-16 mx-auto">
                     <Image
                         src="/images/logo3.png"
                         alt="Kinonramekins Logo"
                         fill
                         className="object-contain"
-                        sizes="(max-width: 768px) 192px, 256px"
+                        sizes="(max-width: 768px) 128px, 160px"
                         priority
                     />
                 </div>
 
-                <h2 className="text-4xl md:text-5xl font-headline font-medium mb-4">
+                <h2 className="text-4xl md:text-5xl font-headline font-medium mb-2">
                     Pilihan Kelas
                 </h2>
-                <p className="text-gray-500 max-w-2xl mx-auto">
-                    Kelas baking online premium untuk rumahan.
-                    Belajar teknik profesional dari dapurmu sendiri.
-                </p>
             </div>
 
             <CategoryFilter

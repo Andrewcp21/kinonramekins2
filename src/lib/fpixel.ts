@@ -1,4 +1,4 @@
-import { FB_PIXEL_ID } from '@/components/MetaPixel';
+import { FB_PIXEL_IDS } from '@/components/MetaPixel';
 
 let ReactPixel: any;
 
@@ -8,7 +8,9 @@ export const initPixel = () => {
         import('react-facebook-pixel')
             .then((x) => {
                 ReactPixel = x.default;
-                ReactPixel.init(FB_PIXEL_ID);
+                FB_PIXEL_IDS.forEach(id => {
+                    ReactPixel.init(id);
+                });
             })
             .catch(err => console.error('Failed to load FB Pixel', err));
     }
