@@ -364,7 +364,7 @@
     "id": "22",
     "category": "Pastries",
     "name": "Assorted Scones",
-    "price": 125000,
+    "price": 150000,
     "description": "Buttery, flaky, moist & doughy centers, crunchy crust. No mixer recipe, tersedia opsi VEGAN. Bisa dimodifikasikan menjadi rasa lain",
     "components": "Plain Scones, Earl Grey Scones + Vanilla Glaze, Triple Chocolate Sea Salt Scones, Bacon & Cheddar Scones",
     "facilities": [
@@ -382,7 +382,7 @@
     "id": "23",
     "category": "Pastries",
     "name": "Crunchy Cream Puffs (Choux au Craquelin)",
-    "price": 125000,
+    "price": 150000,
     "description": "Lengkap dengan opsi Gluten-Free dan Regular",
     "components": "Basic choux pastry, cookie topping, pastry cream/ vla (versatile), cream puff filling + variasi Deluxe Chocolate & Matcha",
     "facilities": [
@@ -400,7 +400,7 @@
     "id": "24",
     "category": "Pastries",
     "name": "Flaky Egg Tarts (Portuguese Egg Tart)",
-    "price": 125000,
+    "price": 150000,
     "description": "Flaky, crispy, kulit berlapis-lapis dan renyah dengan filling egg custard lembut & creamy. No-mixer recipe",
     "components": "Rough puff pastry dough (versatile), egg custard filling",
     "facilities": [
