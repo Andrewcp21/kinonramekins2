@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { X, Check, MessageCircle, PlayCircle, FileText, Settings, Users } from 'lucide-react';
+import { X, Check, MessageCircle, PlayCircle, FileText, Settings, Users, ShoppingCart } from 'lucide-react';
 import { Course } from '@/types';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useCart } from '@/components/CartContext';
 
 interface ProductModalProps {
     course: Course | null;
@@ -14,6 +15,8 @@ interface ProductModalProps {
 
 export default function ProductModal({ course, isOpen, onClose }: ProductModalProps) {
     const modalRef = useRef<HTMLDivElement>(null);
+    const { toggleItem, isInCart } = useCart();
+    const inCart = course ? isInCart(course.id) : false;
 
     // Close on Escape key
     useEffect(() => {
@@ -155,7 +158,7 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
                         </div>
 
                         {/* Sticky Footer */}
-                        <div className="p-4 md:p-6 bg-white border-t border-gray-100 shrink-0">
+                        <div className="p-4 md:p-6 bg-white border-t border-gray-100 shrink-0 flex flex-col gap-3">
                             <a
                                 href={getWhatsappLink(course)}
                                 target="_blank"
@@ -166,9 +169,26 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
                                 <MessageCircle className="w-5 h-5" />
                                 Daftar Kelas via WhatsApp
                             </a>
-                            <p className="text-center text-xs text-gray-400 mt-2">
-                                Daftar Kelas via WhatsApp Admin
-                            </p>
+                            <button
+                                onClick={() => toggleItem(course)}
+                                className={`w-full font-bold py-3 px-6 flex items-center justify-center gap-2 uppercase tracking-widest text-sm transition-all active:scale-[0.98] border-2 ${
+                                    inCart
+                                        ? 'bg-green-50 border-green-600 text-green-700 hover:bg-red-50 hover:border-red-500 hover:text-red-600'
+                                        : 'bg-white border-black text-black hover:bg-black hover:text-white'
+                                }`}
+                            >
+                                {inCart ? (
+                                    <>
+                                        <Check className="w-4 h-4" />
+                                        Ditambahkan ke Keranjang
+                                    </>
+                                ) : (
+                                    <>
+                                        <ShoppingCart className="w-4 h-4" />
+                                        Tambah ke Keranjang
+                                    </>
+                                )}
+                            </button>
                         </div>
                     </motion.div>
                 </div>

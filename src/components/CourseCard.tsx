@@ -1,6 +1,9 @@
+"use client";
+
 import Image from 'next/image';
 import { Course } from '@/types';
-import { BadgeCheck, Sparkles, MessageCircle } from 'lucide-react';
+import { BadgeCheck, Sparkles, ShoppingCart, Check } from 'lucide-react';
+import { useCart } from '@/components/CartContext';
 
 interface CourseCardProps {
     course: Course;
@@ -8,6 +11,9 @@ interface CourseCardProps {
 }
 
 export default function CourseCard({ course, onClick }: CourseCardProps) {
+    const { toggleItem, isInCart } = useCart();
+    const inCart = isInCart(course.id);
+
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat('id-ID', {
             style: 'currency',
@@ -16,30 +22,9 @@ export default function CourseCard({ course, onClick }: CourseCardProps) {
         }).format(price);
     };
 
-    const getWhatsappLink = (course: Course) => {
-        const message = `Halo, saya tertarik dengan kelas ${course.name}. Boleh minta info lebih lanjut?`;
-        return `https://wa.me/6289522453978?text=${encodeURIComponent(message)}`;
-    };
-
-    const handleWhatsAppClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.stopPropagation(); // Prevent card click from triggering
-        e.preventDefault(); // Prevent the default link navigation
-
-        const href = e.currentTarget.href;
-
-        import('@/lib/fpixel').then(fpixel => {
-            fpixel.track('Lead', {
-                content_name: course.name,
-                content_category: course.category,
-                value: course.price,
-                currency: 'IDR'
-            });
-        });
-
-        // Open the link in a new tab after a short delay
-        setTimeout(() => {
-            window.open(href, '_blank', 'noopener,noreferrer');
-        }, 300);
+    const handleCartToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        toggleItem(course);
     };
 
     return (
@@ -84,17 +69,27 @@ export default function CourseCard({ course, onClick }: CourseCardProps) {
                     <span className="text-gold text-sm font-medium hover:underline">Lihat Detail</span>
                 </div>
 
-                {/* WhatsApp CTA Button */}
-                <a
-                    href={getWhatsappLink(course)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={handleWhatsAppClick}
-                    className="w-full bg-green-600 text-white font-bold py-2.5 px-4 flex items-center justify-center gap-2 hover:bg-green-700 transition-colors text-xs uppercase tracking-wider shadow-md hover:shadow-lg active:scale-[0.98] transition-all"
+                {/* Cart Toggle Button */}
+                <button
+                    onClick={handleCartToggle}
+                    className={`w-full font-bold py-2.5 px-4 flex items-center justify-center gap-2 transition-all text-xs uppercase tracking-wider shadow-md hover:shadow-lg active:scale-[0.98] ${
+                        inCart
+                            ? 'bg-green-600 text-white hover:bg-red-600'
+                            : 'bg-black text-white hover:bg-gray-800'
+                    }`}
                 >
-                    <MessageCircle className="w-4 h-4" />
-                    Daftar Kelas
-                </a>
+                    {inCart ? (
+                        <>
+                            <Check className="w-4 h-4" />
+                            Ditambahkan
+                        </>
+                    ) : (
+                        <>
+                            <ShoppingCart className="w-4 h-4" />
+                            Tambah ke Keranjang
+                        </>
+                    )}
+                </button>
             </div>
         </div>
     );

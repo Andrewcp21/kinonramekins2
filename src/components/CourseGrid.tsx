@@ -9,6 +9,7 @@ import CategoryFilter from './CategoryFilter';
 import ProductModal from './ProductModal';
 import coursesData from '@/data/courses.json';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 function CourseGridContent() {
     const searchParams = useSearchParams();
@@ -16,10 +17,17 @@ function CourseGridContent() {
     const [activeCategory, setActiveCategory] = useState('Cookies');
     const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
+    const matilda = coursesData.find(c => c.id === '31');
+
+    const handleAnnouncementClick = () => {
+        setActiveCategory('Cakes & Desserts');
+        if (matilda) setSelectedCourse(matilda as Course);
+    };
+
     const categories = useMemo(() => {
         const cats = new Set(coursesData.map(c => c.category));
         // Ensure specific order if desired, or just sort
-        const order = ['Cookies', 'Breads', 'Pastries', 'Bars & Brownies', 'Others'];
+        const order = ['Cookies', 'Breads', 'Pastries', 'Bars & Brownies', 'Cakes & Desserts', 'Others'];
         return order.filter(c => cats.has(c));
     }, []);
 
@@ -97,6 +105,18 @@ function CourseGridContent() {
                 <h2 className="text-4xl md:text-5xl font-headline font-medium mb-2">
                     Pilihan Kelas
                 </h2>
+
+                <motion.button
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    onClick={handleAnnouncementClick}
+                    className="mt-4 inline-flex items-center gap-2 bg-amber-950 text-amber-50 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-amber-800 transition-colors shadow-md"
+                >
+                    <Sparkles className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                    <span>New Recipe: Matilda Inspired Dark Chocolate Fudge Layer Cake</span>
+                    <ArrowRight className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                </motion.button>
             </div>
 
             <CategoryFilter

@@ -452,7 +452,7 @@
   },
   {
     "id": "28",
-    "category": "Others",
+    "category": "Cakes & Desserts",
     "name": "Classic Carrot Cake",
     "price": 125000,
     "description": "Lengkap dengan opsi Gluten-Free dan Regular",
@@ -470,7 +470,7 @@
   },
   {
     "id": "29",
-    "category": "Others",
+    "category": "Cakes & Desserts",
     "name": "Basque Cheesecake",
     "price": 125000,
     "description": "NEW. Naturally Gluten-Free, tidak menggunakan tepung. No-mixer recipe",
@@ -488,7 +488,7 @@
   },
   {
     "id": "30",
-    "category": "Others",
+    "category": "Cakes & Desserts",
     "name": "Classic Tiramisu & Matchamisu",
     "price": 150000,
     "description": "NEW. Lengkap dengan opsi Gluten-Free dan Regular",
@@ -502,6 +502,23 @@
       "👩‍🍳 Konsultasi via Group WhatsApp!"
     ],
     "image": "/images/products/OT5.png",
+    "badge": "New"
+  },
+  {
+    "id": "31",
+    "category": "Cakes & Desserts",
+    "name": "Matilda Inspired Dark Chocolate Fudge Layer Cake",
+    "price": 175000,
+    "description": "NEW RECIPE! Silky, soft, moist dark chocolate butter cake, dark chocolate fudge filling!",
+    "components": "Moist Dark Chocolate Butter Cake, Dark Chocolate Fudge Filling, Dark Cocoa Syrup, 11 Layers Assembly",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/OT6.png",
     "badge": "New"
   }
 ]
