@@ -14,7 +14,7 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 function CourseGridContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [activeCategory, setActiveCategory] = useState('Cookies');
+    const [activeCategory, setActiveCategory] = useState('Cakes & Desserts');
     const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
     const matilda = coursesData.find(c => c.id === '31');

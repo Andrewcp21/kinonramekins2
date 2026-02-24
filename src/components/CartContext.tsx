@@ -11,6 +11,9 @@ interface CartState {
     isInCart: (id: string) => boolean;
     clearCart: () => void;
     total: number;
+    hasDiscount: boolean;
+    discountedTotal: number;
+    savings: number;
 }
 
 const CartContext = createContext<CartState | null>(null);
@@ -59,9 +62,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const clearCart = () => setItems([]);
 
     const total = items.reduce((sum, i) => sum + i.price, 0);
+    const hasDiscount = items.length >= 3;
+    const savings = hasDiscount ? Math.round(total * 0.1) : 0;
+    const discountedTotal = total - savings;
 
     return (
-        <CartContext.Provider value={{ items, addItem, removeItem, toggleItem, isInCart, clearCart, total }}>
+        <CartContext.Provider value={{ items, addItem, removeItem, toggleItem, isInCart, clearCart, total, hasDiscount, discountedTotal, savings }}>
             {children}
         </CartContext.Provider>
     );

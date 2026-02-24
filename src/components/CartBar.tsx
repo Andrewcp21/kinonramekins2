@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from 'react';
-import { ShoppingCart, X, ChevronUp, ChevronDown, MessageCircle } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ShoppingCart, X, ChevronUp, ChevronDown, MessageCircle, Tag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/components/CartContext';
 
@@ -9,8 +9,44 @@ const formatPrice = (price: number) =>
     new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(price);
 
 export default function CartBar() {
-    const { items, removeItem, total } = useCart();
+    const { items, removeItem, total, hasDiscount, discountedTotal, savings } = useCart();
     const [expanded, setExpanded] = useState(false);
+    const prevCountRef = useRef(items.length);
+
+    // Fire confetti when cart crosses 3 items
+    useEffect(() => {
+        const prev = prevCountRef.current;
+        const curr = items.length;
+        prevCountRef.current = curr;
+
+        if (prev < 3 && curr >= 3) {
+            import('canvas-confetti').then(({ default: confetti }) => {
+                confetti({
+                    particleCount: 180,
+                    spread: 90,
+                    origin: { y: 0.7 },
+                    colors: ['#D4AF37', '#FFD700', '#ffffff', '#000000', '#FFF8DC'],
+                    startVelocity: 45,
+                    gravity: 0.9,
+                });
+                // Second burst for extra flair
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 80,
+                        spread: 60,
+                        origin: { x: 0.2, y: 0.7 },
+                        colors: ['#D4AF37', '#FFD700', '#ffffff'],
+                    });
+                    confetti({
+                        particleCount: 80,
+                        spread: 60,
+                        origin: { x: 0.8, y: 0.7 },
+                        colors: ['#D4AF37', '#FFD700', '#ffffff'],
+                    });
+                }, 200);
+            });
+        }
+    }, [items.length]);
 
     const handleWhatsApp = () => {
         if (items.length === 0) return;
@@ -18,7 +54,7 @@ export default function CartBar() {
         import('@/lib/fpixel').then(fpixel => {
             fpixel.track('InitiateCheckout', {
                 num_items: items.length,
-                value: total,
+                value: discountedTotal,
                 currency: 'IDR',
                 content_ids: items.map(i => i.id),
             });
@@ -27,8 +63,15 @@ export default function CartBar() {
         const lines = items
             .map((item, idx) => `${idx + 1}. ${item.name} – ${formatPrice(item.price)}`)
             .join('\n');
-        const message =
-            `Halo kak, saya mau order kelas berikut:\n\n${lines}\n\nTotal: ${formatPrice(total)}\n\nMohon info selanjutnya ya kak 🙏`;
+
+        let message = `Halo kak, saya mau order kelas berikut:\n\n${lines}\n\nSubtotal: ${formatPrice(total)}`;
+        if (hasDiscount) {
+            message += `\nDiskon 10%: -${formatPrice(savings)}\n*Total: ${formatPrice(discountedTotal)}*`;
+        } else {
+            message += `\n*Total: ${formatPrice(total)}*`;
+        }
+        message += `\n\nMohon info selanjutnya ya kak 🙏`;
+
         window.open(`https://wa.me/6289522453978?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
     };
 
@@ -42,6 +85,25 @@ export default function CartBar() {
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                     className="fixed bottom-0 left-0 right-0 z-40 bg-black text-white shadow-2xl"
                 >
+                    {/* Discount badge strip */}
+                    <AnimatePresence>
+                        {hasDiscount && (
+                            <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.25 }}
+                                className="overflow-hidden"
+                            >
+                                <div className="flex items-center justify-center gap-2 py-1.5 text-xs font-bold tracking-wide"
+                                    style={{ background: '#D4AF37', color: '#000' }}>
+                                    <Tag className="w-3 h-3" />
+                                    <span>Diskon 10% aktif · Hemat {formatPrice(savings)}</span>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
                     {/* Expanded item list */}
                     <AnimatePresence>
                         {expanded && (
@@ -69,6 +131,24 @@ export default function CartBar() {
                                         </li>
                                     ))}
                                 </ul>
+
+                                {/* Totals in expanded view */}
+                                {hasDiscount && (
+                                    <div className="max-w-4xl mx-auto px-4 pb-3 border-t border-white/10 pt-2 space-y-1">
+                                        <div className="flex justify-between text-xs text-white/50">
+                                            <span>Subtotal</span>
+                                            <span className="font-mono">{formatPrice(total)}</span>
+                                        </div>
+                                        <div className="flex justify-between text-xs text-[#D4AF37]">
+                                            <span>Diskon 10%</span>
+                                            <span className="font-mono">-{formatPrice(savings)}</span>
+                                        </div>
+                                        <div className="flex justify-between text-sm font-bold">
+                                            <span>Total</span>
+                                            <span className="font-mono">{formatPrice(discountedTotal)}</span>
+                                        </div>
+                                    </div>
+                                )}
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -82,9 +162,21 @@ export default function CartBar() {
                             aria-label="Toggle cart details"
                         >
                             <ShoppingCart className="w-5 h-5 text-[#D4AF37] shrink-0" />
-                            <span className="font-semibold text-sm truncate">
-                                {items.length} kelas dipilih&nbsp;·&nbsp;{formatPrice(total)}
-                            </span>
+                            <div className="flex flex-col min-w-0">
+                                <span className="font-semibold text-sm truncate">
+                                    {items.length} kelas dipilih
+                                    {hasDiscount ? (
+                                        <>
+                                            &nbsp;·&nbsp;
+                                            <span className="line-through text-white/40">{formatPrice(total)}</span>
+                                            &nbsp;
+                                            <span className="text-[#D4AF37]">{formatPrice(discountedTotal)}</span>
+                                        </>
+                                    ) : (
+                                        <>&nbsp;·&nbsp;{formatPrice(total)}</>
+                                    )}
+                                </span>
+                            </div>
                             {expanded
                                 ? <ChevronDown className="w-4 h-4 ml-auto shrink-0" />
                                 : <ChevronUp className="w-4 h-4 ml-auto shrink-0" />
