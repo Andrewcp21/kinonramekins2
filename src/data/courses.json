@@ -451,22 +451,21 @@
     "badge": null
   },
   {
-    "id": "28",
+    "id": "31",
     "category": "Cakes & Desserts",
-    "name": "Classic Carrot Cake",
-    "price": 125000,
-    "description": "Lengkap dengan opsi Gluten-Free dan Regular",
-    "components": "Classic Carrot Cake, almond crumble topping, brown butter cream cheese frosting",
+    "name": "Matilda Inspired Dark Chocolate Fudge Layer Cake",
+    "price": 175000,
+    "description": "NEW RECIPE! Silky, soft, moist dark chocolate butter cake, dark chocolate fudge filling!",
+    "components": "Moist Dark Chocolate Butter Cake, Dark Chocolate Fudge Filling, Dark Cocoa Syrup, 11 Layers Assembly",
     "facilities": [
       "📺 Video Guide",
-      "🕰️ Jadwal Pembuatan per Jam",
       "📝 List lengkap Alat dan Bahan (termasuk rekomendasi merk bahan)",
       "🍽️ Resep Tertulis",
       "⚙️ Troubleshooting Guide",
       "👩‍🍳 Konsultasi via Group WhatsApp!"
     ],
-    "image": "/images/products/OT3.png",
-    "badge": null
+    "image": "/images/products/OT6.png",
+    "badge": "New"
   },
   {
     "id": "29",
@@ -505,20 +504,21 @@
     "badge": "New"
   },
   {
-    "id": "31",
+    "id": "28",
     "category": "Cakes & Desserts",
-    "name": "Matilda Inspired Dark Chocolate Fudge Layer Cake",
-    "price": 175000,
-    "description": "NEW RECIPE! Silky, soft, moist dark chocolate butter cake, dark chocolate fudge filling!",
-    "components": "Moist Dark Chocolate Butter Cake, Dark Chocolate Fudge Filling, Dark Cocoa Syrup, 11 Layers Assembly",
+    "name": "Classic Carrot Cake",
+    "price": 125000,
+    "description": "Lengkap dengan opsi Gluten-Free dan Regular",
+    "components": "Classic Carrot Cake, almond crumble topping, brown butter cream cheese frosting",
     "facilities": [
       "📺 Video Guide",
+      "🕰️ Jadwal Pembuatan per Jam",
       "📝 List lengkap Alat dan Bahan (termasuk rekomendasi merk bahan)",
       "🍽️ Resep Tertulis",
       "⚙️ Troubleshooting Guide",
       "👩‍🍳 Konsultasi via Group WhatsApp!"
     ],
-    "image": "/images/products/OT6.png",
-    "badge": "New"
+    "image": "/images/products/OT3.png",
+    "badge": null
   }
 ]
