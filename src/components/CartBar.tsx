@@ -64,7 +64,7 @@ export default function CartBar() {
             .map((item, idx) => `${idx + 1}. ${item.name} – ${formatPrice(item.price)}`)
             .join('\n');
 
-        let message = `Halo kak, saya mau order kelas berikut:\n\n${lines}\n\nSubtotal: ${formatPrice(total)}`;
+        let message = `Halo kak, saya mau daftar kelas berikut:\n\n${lines}\n\nSubtotal: ${formatPrice(total)}`;
         if (hasDiscount) {
             message += `\nDiskon 10%: -${formatPrice(savings)}\n*Total: ${formatPrice(discountedTotal)}*`;
         } else {
