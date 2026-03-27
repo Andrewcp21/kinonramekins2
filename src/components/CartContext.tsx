@@ -1,7 +1,22 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Course } from '@/types';
+
+const PROMO_DEADLINE = new Date('2026-04-01T23:59:00');
+
+function usePromoActive() {
+    const [active, setActive] = useState(() => new Date() <= PROMO_DEADLINE);
+
+    useEffect(() => {
+        const remaining = PROMO_DEADLINE.getTime() - Date.now();
+        if (remaining <= 0) return;
+        const id = setTimeout(() => setActive(false), remaining);
+        return () => clearTimeout(id);
+    }, []);
+
+    return active;
+}
 
 interface CartState {
     items: Course[];
@@ -61,9 +76,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     const clearCart = () => setItems([]);
 
+    const promoActive = usePromoActive();
     const total = items.reduce((sum, i) => sum + i.price, 0);
-    const hasDiscount = items.length >= 3;
-    const savings = hasDiscount ? Math.round(total * 0.1) : 0;
+    const hasDiscount = items.length >= 3 && promoActive;
+    const savings = hasDiscount ? Math.round(total * 0.15) : 0;
     const discountedTotal = total - savings;
 
     return (
