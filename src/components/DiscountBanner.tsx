@@ -63,7 +63,7 @@ export default function DiscountBanner() {
             className="fixed top-0 left-0 right-0 z-50 overflow-hidden"
             style={{ background: '#D4AF37' }}
         >
-            <div className="relative max-w-4xl mx-auto px-4 py-1.5 flex flex-col items-center justify-center gap-0.5 text-black text-sm font-semibold">
+            <div className="relative max-w-4xl mx-auto px-8 py-1.5 flex flex-col items-center justify-center gap-0.5 text-black text-sm font-semibold text-center">
                 <span className="text-xs font-bold uppercase tracking-widest opacity-60">Pay Day Limited Promo!</span>
                 <AnimatePresence mode="wait">
                     {hasDiscount ? (
@@ -73,16 +73,16 @@ export default function DiscountBanner() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 16 }}
                             transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-                            className="flex flex-col items-center gap-0.5 sm:flex-row sm:gap-2"
+                            className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2"
                         >
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center justify-center gap-2">
                                 <Sparkles className="w-4 h-4 shrink-0" />
                                 <span className="font-bold tracking-wide">Diskon 15% aktif!</span>
                                 <span className="opacity-70 font-normal hidden sm:inline">· Hemat 15% sudah diterapkan ke pesananmu</span>
                             </div>
                             {countdown && (
-                                <span className="flex items-center gap-1 opacity-80 font-mono text-xs">
-                                    <Clock className="w-3 h-3 shrink-0" />
+                                <span className="flex items-center justify-center gap-1 opacity-80 font-mono text-sm font-bold">
+                                    <Clock className="w-4 h-4 shrink-0" />
                                     {countdown}
                                 </span>
                             )}
@@ -94,9 +94,9 @@ export default function DiscountBanner() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 16 }}
                             transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-                            className="flex flex-col items-center gap-0.5 sm:flex-row sm:gap-2"
+                            className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2"
                         >
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center justify-center gap-2">
                                 <Tag className="w-4 h-4 shrink-0" />
                                 <span>
                                     Diskon 15% untuk 3 menu atau lebih
@@ -104,8 +104,8 @@ export default function DiscountBanner() {
                                 </span>
                             </div>
                             {countdown && (
-                                <span className="flex items-center gap-1 opacity-70 font-mono text-xs">
-                                    <Clock className="w-3 h-3 shrink-0" />
+                                <span className="flex items-center justify-center gap-1 opacity-70 font-mono text-sm font-bold">
+                                    <Clock className="w-4 h-4 shrink-0" />
                                     {countdown}
                                 </span>
                             )}
@@ -117,15 +117,15 @@ export default function DiscountBanner() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 16 }}
                             transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-                            className="flex flex-col items-center gap-0.5 sm:flex-row sm:gap-2"
+                            className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2"
                         >
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center justify-center gap-2">
                                 <Tag className="w-4 h-4 shrink-0" />
                                 <span>Diskon 15% untuk 3 menu atau lebih · s/d 1 Apr</span>
                             </div>
                             {countdown && (
-                                <span className="flex items-center gap-1 opacity-70 font-mono text-xs">
-                                    <Clock className="w-3 h-3 shrink-0" />
+                                <span className="flex items-center justify-center gap-1 opacity-70 font-mono text-sm font-bold">
+                                    <Clock className="w-4 h-4 shrink-0" />
                                     {countdown}
                                 </span>
                             )}
