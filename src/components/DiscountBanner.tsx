@@ -81,8 +81,8 @@ export default function DiscountBanner() {
                                 <span className="opacity-70 font-normal hidden sm:inline">· Hemat 15% sudah diterapkan ke pesananmu</span>
                             </div>
                             {countdown && (
-                                <span className="flex items-center justify-center gap-1 opacity-80 font-mono text-sm font-bold">
-                                    <Clock className="w-4 h-4 shrink-0" />
+                                <span className="flex items-center justify-center gap-1 bg-black text-white font-mono text-sm font-bold px-3 py-0.5 rounded-full">
+                                    <Clock className="w-3.5 h-3.5 shrink-0" />
                                     {countdown}
                                 </span>
                             )}
@@ -121,7 +121,7 @@ export default function DiscountBanner() {
                         >
                             <div className="flex items-center justify-center gap-2">
                                 <Tag className="w-4 h-4 shrink-0" />
-                                <span>Diskon 15% untuk 3 menu atau lebih · s/d 1 Apr</span>
+                                <span>Diskon 15% untuk 3 menu atau lebih</span>
                             </div>
                             {countdown && (
                                 <span className="flex items-center justify-center gap-1 opacity-70 font-mono text-sm font-bold">
