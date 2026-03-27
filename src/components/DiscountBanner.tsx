@@ -81,10 +81,13 @@ export default function DiscountBanner() {
                                 <span className="opacity-70 font-normal hidden sm:inline">· Hemat 15% sudah diterapkan ke pesananmu</span>
                             </div>
                             {countdown && (
-                                <span className="flex items-center justify-center gap-1 bg-black text-white font-mono text-sm font-bold px-3 py-0.5 rounded-full">
-                                    <Clock className="w-3.5 h-3.5 shrink-0" />
-                                    {countdown}
-                                </span>
+                                <div className="flex items-center justify-center gap-2">
+                                    <span className="text-sm font-semibold opacity-70">s/d 1 April</span>
+                                    <span className="flex items-center gap-1 bg-black text-white font-mono text-sm font-bold px-3 py-0.5 rounded-full">
+                                        <Clock className="w-3.5 h-3.5 shrink-0" />
+                                        {countdown}
+                                    </span>
+                                </div>
                             )}
                         </motion.div>
                     ) : hasItems ? (
