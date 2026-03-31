@@ -94,6 +94,20 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
             });
         });
 
+        import('@/lib/gtag').then(gtag => {
+            gtag.event('generate_lead', {
+                currency: 'IDR',
+                value: course.price,
+                items: [{
+                    item_id: course.id,
+                    item_name: course.name,
+                    item_category: course.category,
+                    price: course.price,
+                    quantity: 1,
+                }],
+            });
+        });
+
         setTimeout(() => {
             window.open(href, '_blank', 'noopener,noreferrer');
         }, 300);
