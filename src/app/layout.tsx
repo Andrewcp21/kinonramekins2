@@ -3,6 +3,7 @@ import { Poppins, Playfair_Display, Fredoka } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import MetaPixel from "@/components/MetaPixel";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Script from 'next/script';
 
 export const dynamic = 'force-dynamic';
@@ -94,6 +95,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${playfair.variable} ${fredoka.variable} antialiased font-sans`}>
         <Suspense fallback={null}>
           <MetaPixel />
+          <GoogleAnalytics />
         </Suspense>
         {children}
       </body>

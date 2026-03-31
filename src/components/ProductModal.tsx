@@ -27,6 +27,36 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
         return () => window.removeEventListener('keydown', handleEsc);
     }, [onClose]);
 
+    // Fire ViewContent tracking when modal opens
+    useEffect(() => {
+        if (!isOpen || !course) return;
+
+        import('@/lib/fpixel').then(fpixel => {
+            fpixel.track('ViewContent', {
+                content_name: course.name,
+                content_category: course.category,
+                content_ids: [course.id],
+                content_type: 'product',
+                value: course.price,
+                currency: 'IDR',
+            });
+        });
+
+        import('@/lib/gtag').then(gtag => {
+            gtag.event('view_item', {
+                currency: 'IDR',
+                value: course.price,
+                items: [{
+                    item_id: course.id,
+                    item_name: course.name,
+                    item_category: course.category,
+                    price: course.price,
+                    quantity: 1,
+                }],
+            });
+        });
+    }, [isOpen, course]);
+
     // Prevent background scroll when open
     useEffect(() => {
         if (isOpen) {
