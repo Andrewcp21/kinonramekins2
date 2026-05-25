@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { CartProvider } from "@/components/CartContext";
 import CartBar from "@/components/CartBar";
 import DiscountBanner from "@/components/DiscountBanner";
+import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 
 // Lazy load below-the-fold components
 const CourseGrid = dynamic(() => import("@/components/CourseGrid"), {
@@ -28,6 +29,7 @@ export default function Home() {
     <CartProvider>
       {/* <DiscountBanner /> */}
       <main className="min-h-screen bg-white text-black font-sans selection:bg-gold selection:text-white pt-10">
+        <ScrollDepthTracker />
         <Suspense fallback={null}>
           <MetaPixel />
         </Suspense>

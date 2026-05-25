@@ -47,6 +47,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
                     currency: 'IDR',
                 });
             });
+            import('@/lib/gtag').then(gtag => {
+                gtag.event('add_to_cart', {
+                    currency: 'IDR',
+                    value: course.price,
+                    items: [{
+                        item_id: course.id,
+                        item_name: course.name,
+                        item_category: course.category,
+                        price: course.price,
+                        quantity: 1,
+                    }],
+                });
+            });
             return [...prev, course];
         });
     };
@@ -66,6 +79,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
                     content_category: course.category,
                     value: course.price,
                     currency: 'IDR',
+                });
+            });
+            import('@/lib/gtag').then(gtag => {
+                gtag.event('add_to_cart', {
+                    currency: 'IDR',
+                    value: course.price,
+                    items: [{
+                        item_id: course.id,
+                        item_name: course.name,
+                        item_category: course.category,
+                        price: course.price,
+                        quantity: 1,
+                    }],
                 });
             });
             return [...prev, course];

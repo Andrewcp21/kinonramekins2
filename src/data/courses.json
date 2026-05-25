@@ -361,6 +361,23 @@
     "badge": null
   },
   {
+    "id": "27",
+    "category": "Breads",
+    "name": "Bagels",
+    "price": 300000,
+    "description": "Beginner level, dibuat dengan hand mixer. Tanpa butter, susu, dan telur. Vegan-Friendly Recipe",
+    "components": "Classic NY-Style Plain Bagel, Everything Bagel, Smoked Beef & Cheddar Bagel, Matcha Cranberry White Chocolate Bagel, Double Chocolate Bagel, Blueberry Cream Cheese Bagel",
+    "facilities": [
+      "📺 Video Guide",
+      "📝 List lengkap Alat dan Bahan (termasuk rekomendasi merk bahan)",
+      "🍽️ Resep Tertulis",
+      "⚙️ Troubleshooting Guide",
+      "👩‍🍳 Konsultasi via Group WhatsApp!"
+    ],
+    "image": "/images/products/BR4.png",
+    "badge": null
+  },
+  {
     "id": "22",
     "category": "Pastries",
     "name": "Assorted Scones",

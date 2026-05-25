@@ -17,11 +17,11 @@ function CourseGridContent() {
     const [activeCategory, setActiveCategory] = useState('Cakes & Desserts');
     const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
-    const matilda = coursesData.find(c => c.id === '31');
+    const bagels = coursesData.find(c => c.id === '27');
 
     const handleAnnouncementClick = () => {
-        setActiveCategory('Cakes & Desserts');
-        if (matilda) setSelectedCourse(matilda as Course);
+        setActiveCategory('Breads');
+        if (bagels) handleSelectCourse(bagels as Course);
     };
 
     const categories = useMemo(() => {
@@ -75,6 +75,39 @@ function CourseGridContent() {
         }
     };
 
+    // Fire view_item_list whenever the visible category/courses change
+    useEffect(() => {
+        import('@/lib/gtag').then(gtag => {
+            gtag.event('view_item_list', {
+                item_list_id: activeCategory.toLowerCase().replace(/\s+/g, '_'),
+                item_list_name: activeCategory,
+                items: filteredCourses.map((c, idx) => ({
+                    item_id: c.id,
+                    item_name: c.name,
+                    item_category: c.category,
+                    price: c.price,
+                    index: idx,
+                })),
+            });
+        });
+    }, [activeCategory]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const handleSelectCourse = (course: Course) => {
+        import('@/lib/gtag').then(gtag => {
+            gtag.event('select_item', {
+                item_list_id: activeCategory.toLowerCase().replace(/\s+/g, '_'),
+                item_list_name: activeCategory,
+                items: [{
+                    item_id: course.id,
+                    item_name: course.name,
+                    item_category: course.category,
+                    price: course.price,
+                }],
+            });
+        });
+        setSelectedCourse(course);
+    };
+
     const handleCloseModal = () => {
         setSelectedCourse(null);
         // Clear query param without full refresh
@@ -114,7 +147,7 @@ function CourseGridContent() {
                     className="mt-4 inline-flex items-center gap-2 bg-amber-950 text-amber-50 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-amber-800 transition-colors shadow-md"
                 >
                     <Sparkles className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                    <span>New Recipe: Matilda Inspired Dark Chocolate Fudge Layer Cake</span>
+                    <span>New Recipe: Bagels</span>
                     <ArrowRight className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 </motion.button>
             </div>
@@ -141,7 +174,7 @@ function CourseGridContent() {
                         >
                             <CourseCard
                                 course={course as Course}
-                                onClick={() => setSelectedCourse(course as Course)}
+                                onClick={() => handleSelectCourse(course as Course)}
                             />
                         </motion.div>
                     ))}

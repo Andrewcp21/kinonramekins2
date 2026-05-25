@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { event as gaEvent } from '@/lib/gtag';
 
 const favorites = [
     {
@@ -86,8 +87,30 @@ function VideoItem({ item, index }: { item: typeof favorites[0], index: number }
 }
 
 export default function FavoritesVideoSection() {
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const el = sectionRef.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    gaEvent('view_promotion', {
+                        promotion_id: 'favorites_video_section',
+                        promotion_name: 'Most Favorites Menu',
+                        creative_slot: 'below_fold',
+                    });
+                    observer.unobserve(el);
+                }
+            },
+            { threshold: 0.3 }
+        );
+        observer.observe(el);
+        return () => observer.unobserve(el);
+    }, []);
+
     return (
-        <section className="py-20 px-6 bg-white overflow-hidden">
+        <section ref={sectionRef} className="py-20 px-6 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
                     <span className="text-amber-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block">
