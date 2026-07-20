@@ -158,7 +158,7 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
                             </div>
 
                             {/* Content Section - Scrollable on Desktop */}
-                            <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col md:overflow-y-auto">
+                            <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col overflow-y-auto">
                                 <div className="mb-2 text-gold font-bold uppercase tracking-widest text-sm">
                                     {course.category}
                                 </div>
