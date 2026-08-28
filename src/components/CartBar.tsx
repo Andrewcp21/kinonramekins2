@@ -11,15 +11,15 @@ const formatPrice = (price: number) =>
 export default function CartBar() {
     const { items, removeItem, total, hasDiscount, discountedTotal, savings } = useCart();
     const [expanded, setExpanded] = useState(false);
-    const prevCountRef = useRef(items.length);
+    const prevDiscountRef = useRef(hasDiscount);
 
-    // Fire confetti when cart crosses 3 items
+    // Fire confetti when the cart crosses the discount threshold
     useEffect(() => {
-        const prev = prevCountRef.current;
-        const curr = items.length;
-        prevCountRef.current = curr;
+        const prev = prevDiscountRef.current;
+        const curr = hasDiscount;
+        prevDiscountRef.current = curr;
 
-        if (prev < 3 && curr >= 3) {
+        if (!prev && curr) {
             import('canvas-confetti').then(({ default: confetti }) => {
                 confetti({
                     particleCount: 180,
@@ -46,7 +46,7 @@ export default function CartBar() {
                 }, 200);
             });
         }
-    }, [items.length]);
+    }, [hasDiscount]);
 
     const handleWhatsApp = () => {
         if (items.length === 0) return;
@@ -66,7 +66,7 @@ export default function CartBar() {
 
         let message = `Halo kak, saya mau daftar kelas berikut:\n\n${lines}\n\nSubtotal: ${formatPrice(total)}`;
         if (hasDiscount) {
-            message += `\nDiskon 15%: -${formatPrice(savings)}\n*Total: ${formatPrice(discountedTotal)}*`;
+            message += `\nDiskon 10%: -${formatPrice(savings)}\n*Total: ${formatPrice(discountedTotal)}*`;
         } else {
             message += `\n*Total: ${formatPrice(total)}*`;
         }
@@ -98,7 +98,7 @@ export default function CartBar() {
                                 <div className="flex items-center justify-center gap-2 py-1.5 text-xs font-bold tracking-wide"
                                     style={{ background: '#D4AF37', color: '#000' }}>
                                     <Tag className="w-3 h-3" />
-                                    <span>Diskon 15% aktif · Hemat {formatPrice(savings)}</span>
+                                    <span>Diskon 10% aktif · Hemat {formatPrice(savings)}</span>
                                 </div>
                             </motion.div>
                         )}
@@ -140,7 +140,7 @@ export default function CartBar() {
                                             <span className="font-mono">{formatPrice(total)}</span>
                                         </div>
                                         <div className="flex justify-between text-xs text-[#D4AF37]">
-                                            <span>Diskon 15%</span>
+                                            <span>Diskon 10%</span>
                                             <span className="font-mono">-{formatPrice(savings)}</span>
                                         </div>
                                         <div className="flex justify-between text-sm font-bold">

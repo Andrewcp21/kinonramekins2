@@ -3,7 +3,8 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Course } from '@/types';
 
-const PROMO_DEADLINE = new Date('2026-04-01T23:59:00');
+const PROMO_DEADLINE = new Date('2026-09-01T23:59:00');
+const MIN_PURCHASE = 300000;
 
 function usePromoActive() {
     const [active, setActive] = useState(() => new Date() <= PROMO_DEADLINE);
@@ -104,8 +105,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     const promoActive = usePromoActive();
     const total = items.reduce((sum, i) => sum + i.price, 0);
-    const hasDiscount = items.length >= 3 && promoActive;
-    const savings = hasDiscount ? Math.round(total * 0.15) : 0;
+    const hasDiscount = total >= MIN_PURCHASE && promoActive;
+    const savings = hasDiscount ? Math.round(total * 0.10) : 0;
     const discountedTotal = total - savings;
 
     return (

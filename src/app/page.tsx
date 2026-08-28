@@ -27,7 +27,7 @@ const ClassIncludesSection = dynamic(() => import("@/components/ClassIncludesSec
 export default function Home() {
   return (
     <CartProvider>
-      {/* <DiscountBanner /> */}
+      <DiscountBanner />
       <main className="min-h-screen bg-white text-black font-sans selection:bg-gold selection:text-white pt-10">
         <ScrollDepthTracker />
         <Suspense fallback={null}>

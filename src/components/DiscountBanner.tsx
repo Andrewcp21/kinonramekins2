@@ -5,7 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Tag, Sparkles, Clock } from 'lucide-react';
 import { useCart } from '@/components/CartContext';
 
-const PROMO_DEADLINE = new Date('2026-04-01T23:59:00');
+const PROMO_DEADLINE = new Date('2026-09-01T23:59:00');
+const MIN_PURCHASE = 300000;
+
+const formatPrice = (price: number) =>
+    new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(price);
 
 function useCountdown() {
     const [timeLeft, setTimeLeft] = useState('');
@@ -50,8 +54,8 @@ function usePromoActive() {
 }
 
 export default function DiscountBanner() {
-    const { items, hasDiscount } = useCart();
-    const remaining = Math.max(0, 3 - items.length);
+    const { items, total, hasDiscount } = useCart();
+    const remaining = Math.max(0, MIN_PURCHASE - total);
     const hasItems = items.length > 0;
     const countdown = useCountdown();
     const promoActive = usePromoActive();
@@ -64,7 +68,7 @@ export default function DiscountBanner() {
             style={{ background: '#D4AF37' }}
         >
             <div className="relative max-w-4xl mx-auto px-8 py-1.5 flex flex-col items-center justify-center gap-0.5 text-black text-sm font-semibold text-center">
-                <span className="text-xs font-bold uppercase tracking-widest opacity-60">Pay Day Limited Promo!</span>
+                <span className="text-xs font-bold uppercase tracking-widest opacity-60">Payday Sale!</span>
                 <AnimatePresence mode="wait">
                     {hasDiscount ? (
                         <motion.div
@@ -77,12 +81,12 @@ export default function DiscountBanner() {
                         >
                             <div className="flex items-center justify-center gap-2">
                                 <Sparkles className="w-4 h-4 shrink-0" />
-                                <span className="font-bold tracking-wide">Diskon 15% aktif!</span>
-                                <span className="opacity-70 font-normal hidden sm:inline">· Hemat 15% sudah diterapkan ke pesananmu</span>
+                                <span className="font-bold tracking-wide">Diskon 10% aktif!</span>
+                                <span className="opacity-70 font-normal hidden sm:inline">· Hemat 10% sudah diterapkan ke pesananmu</span>
                             </div>
                             {countdown && (
                                 <div className="flex items-center justify-center gap-2">
-                                    <span className="text-sm font-semibold opacity-70">s/d 1 April</span>
+                                    <span className="text-sm font-semibold opacity-70">s/d 1 September</span>
                                     <span className="flex items-center gap-1 bg-black text-white font-mono text-sm font-bold px-3 py-0.5 rounded-full">
                                         <Clock className="w-3.5 h-3.5 shrink-0" />
                                         {countdown}
@@ -102,8 +106,8 @@ export default function DiscountBanner() {
                             <div className="flex items-center justify-center gap-2">
                                 <Tag className="w-4 h-4 shrink-0" />
                                 <span>
-                                    Diskon 15% untuk 3 menu atau lebih
-                                    <span className="font-bold"> · Tambah {remaining} menu lagi untuk hemat!</span>
+                                    Diskon 10% untuk min. belanja {formatPrice(MIN_PURCHASE)}
+                                    <span className="font-bold"> · Tambah {formatPrice(remaining)} lagi untuk hemat!</span>
                                 </span>
                             </div>
                             {countdown && (
@@ -124,7 +128,7 @@ export default function DiscountBanner() {
                         >
                             <div className="flex items-center justify-center gap-2">
                                 <Tag className="w-4 h-4 shrink-0" />
-                                <span>Diskon 15% untuk 3 menu atau lebih</span>
+                                <span>Diskon 10% untuk min. belanja {formatPrice(MIN_PURCHASE)}</span>
                             </div>
                             {countdown && (
                                 <span className="flex items-center justify-center gap-1 opacity-70 font-mono text-sm font-bold">
