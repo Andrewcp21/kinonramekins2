@@ -67,8 +67,9 @@ export default function DiscountBanner() {
             className="fixed top-0 left-0 right-0 z-50 overflow-hidden"
             style={{ background: '#D4AF37' }}
         >
-            <div className="relative max-w-4xl mx-auto px-8 py-1.5 flex flex-col items-center justify-center gap-0.5 text-black text-sm font-semibold text-center">
-                <span className="text-xs font-bold uppercase tracking-widest opacity-60">Payday Sale!</span>
+            <div className="relative max-w-5xl mx-auto px-4 sm:px-8 py-1.5 sm:py-2 flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-3 text-black text-sm sm:text-base font-semibold text-center sm:whitespace-nowrap">
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-widest opacity-60 shrink-0">Payday Sale!</span>
+                <span className="hidden sm:inline text-black/30">|</span>
                 <AnimatePresence mode="wait">
                     {hasDiscount ? (
                         <motion.div
@@ -80,15 +81,15 @@ export default function DiscountBanner() {
                             className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2"
                         >
                             <div className="flex items-center justify-center gap-2">
-                                <Sparkles className="w-4 h-4 shrink-0" />
+                                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                                 <span className="font-bold tracking-wide">Diskon 10% aktif!</span>
                                 <span className="opacity-70 font-normal hidden sm:inline">· Hemat 10% sudah diterapkan ke pesananmu</span>
                             </div>
                             {countdown && (
                                 <div className="flex items-center justify-center gap-2">
-                                    <span className="text-sm font-semibold opacity-70">s/d 1 September</span>
-                                    <span className="flex items-center gap-1 bg-black text-white font-mono text-sm font-bold px-3 py-0.5 rounded-full">
-                                        <Clock className="w-3.5 h-3.5 shrink-0" />
+                                    <span className="text-sm sm:text-base font-semibold opacity-70">s/d 1 September</span>
+                                    <span className="flex items-center gap-1 bg-black text-white font-mono text-sm sm:text-base font-bold px-3 sm:px-4 py-0.5 sm:py-1 rounded-full">
+                                        <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                                         {countdown}
                                     </span>
                                 </div>
@@ -104,15 +105,15 @@ export default function DiscountBanner() {
                             className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2"
                         >
                             <div className="flex items-center justify-center gap-2">
-                                <Tag className="w-4 h-4 shrink-0" />
+                                <Tag className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                                 <span>
                                     Diskon 10% untuk min. belanja {formatPrice(MIN_PURCHASE)}
                                     <span className="font-bold"> · Tambah {formatPrice(remaining)} lagi untuk hemat!</span>
                                 </span>
                             </div>
                             {countdown && (
-                                <span className="flex items-center justify-center gap-1 opacity-70 font-mono text-sm font-bold">
-                                    <Clock className="w-4 h-4 shrink-0" />
+                                <span className="flex items-center justify-center gap-1 opacity-70 font-mono text-sm sm:text-base font-bold">
+                                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                                     {countdown}
                                 </span>
                             )}
@@ -127,12 +128,12 @@ export default function DiscountBanner() {
                             className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2"
                         >
                             <div className="flex items-center justify-center gap-2">
-                                <Tag className="w-4 h-4 shrink-0" />
+                                <Tag className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                                 <span>Diskon 10% untuk min. belanja {formatPrice(MIN_PURCHASE)}</span>
                             </div>
                             {countdown && (
-                                <span className="flex items-center justify-center gap-1 opacity-70 font-mono text-sm font-bold">
-                                    <Clock className="w-4 h-4 shrink-0" />
+                                <span className="flex items-center justify-center gap-1 opacity-70 font-mono text-sm sm:text-base font-bold">
+                                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
                                     {countdown}
                                 </span>
                             )}
