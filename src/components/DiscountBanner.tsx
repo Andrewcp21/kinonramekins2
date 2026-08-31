@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Tag, Sparkles, Clock } from 'lucide-react';
 import { useCart } from '@/components/CartContext';
 
-const PROMO_DEADLINE = new Date('2026-09-01T23:59:00');
+const PROMO_DEADLINE = new Date('2026-08-31T23:59:00');
 const MIN_PURCHASE = 300000;
 
 const formatPrice = (price: number) =>
@@ -87,7 +87,7 @@ export default function DiscountBanner() {
                             </div>
                             {countdown && (
                                 <div className="flex items-center justify-center gap-2">
-                                    <span className="text-sm sm:text-base font-semibold opacity-70">s/d 1 September</span>
+                                    <span className="text-sm sm:text-base font-semibold opacity-70">s/d 31 Agustus</span>
                                     <span className="flex items-center gap-1 bg-black text-white font-mono text-sm sm:text-base font-bold px-3 sm:px-4 py-0.5 sm:py-1 rounded-full">
                                         <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                                         {countdown}

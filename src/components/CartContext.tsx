@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Course } from '@/types';
 
-const PROMO_DEADLINE = new Date('2026-09-01T23:59:00');
+const PROMO_DEADLINE = new Date('2026-08-31T23:59:00');
 const MIN_PURCHASE = 300000;
 
 function usePromoActive() {
