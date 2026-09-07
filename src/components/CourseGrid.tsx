@@ -17,11 +17,11 @@ function CourseGridContent() {
     const [activeCategory, setActiveCategory] = useState('Cakes & Desserts');
     const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
-    const bagels = coursesData.find(c => c.id === '27');
+    const londonCake = coursesData.find(c => c.id === '32');
 
     const handleAnnouncementClick = () => {
-        setActiveCategory('Breads');
-        if (bagels) handleSelectCourse(bagels as Course);
+        setActiveCategory('Cakes & Desserts');
+        if (londonCake) handleSelectCourse(londonCake as Course);
     };
 
     const categories = useMemo(() => {
@@ -147,7 +147,7 @@ function CourseGridContent() {
                     className="mt-4 inline-flex items-center gap-2 bg-amber-950 text-amber-50 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-amber-800 transition-colors shadow-md"
                 >
                     <Sparkles className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                    <span>New Recipe: Bagels</span>
+                    <span>New Recipe: London Chocolate Cake</span>
                     <ArrowRight className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 </motion.button>
             </div>
