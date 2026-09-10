@@ -215,37 +215,9 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
                                     {formatPrice(course.price)}
                                 </div>
 
-                                <div className="prose prose-sm mb-6 text-gray-600">
-                                    <p>{course.description}</p>
-                                    {course.components && course.components !== '-' && (
-                                        <p className="mt-2 text-sm italic">Component: {course.components}</p>
-                                    )}
-                                </div>
-
-                                {/* Value Stack */}
-                                <div className="bg-gray-50 p-6 rounded-lg mb-8 border border-gray-100">
-                                    <h4 className="font-bold uppercase tracking-wider text-sm mb-4 border-b border-gray-200 pb-2">
-                                        What You Get
-                                    </h4>
-                                    <ul className="space-y-3">
-                                        {course.facilities.map((facility, idx) => (
-                                            <li key={idx} className="flex items-start gap-3 text-sm text-gray-700">
-                                                <div className="mt-0.5 shrink-0 text-gold">
-                                                    {facility.toLowerCase().includes('video') ? <PlayCircle className="w-4 h-4" /> :
-                                                        facility.toLowerCase().includes('resep') ? <FileText className="w-4 h-4" /> :
-                                                            facility.toLowerCase().includes('trouble') ? <Settings className="w-4 h-4" /> :
-                                                                facility.toLowerCase().includes('group') ? <Users className="w-4 h-4" /> :
-                                                                    <Check className="w-4 h-4" />}
-                                                </div>
-                                                <span>{facility}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
                                 {/* Bundle Deal */}
                                 {course.bundleWith && partnerCourse && (
-                                    <div className="bg-gold/5 p-6 rounded-lg mb-8 border-2 border-gold/30">
+                                    <div className="bg-gold/5 p-6 rounded-lg mb-6 border-2 border-gold/30">
                                         <h4 className="font-bold uppercase tracking-wider text-sm mb-4 flex items-center gap-2">
                                             <Gift className="w-4 h-4 text-gold" />
                                             {course.bundleWith.label ?? 'Bundle Deal'}
@@ -291,6 +263,34 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
                                         </a>
                                     </div>
                                 )}
+
+                                <div className="prose prose-sm mb-6 text-gray-600">
+                                    <p>{course.description}</p>
+                                    {course.components && course.components !== '-' && (
+                                        <p className="mt-2 text-sm italic">Component: {course.components}</p>
+                                    )}
+                                </div>
+
+                                {/* Value Stack */}
+                                <div className="bg-gray-50 p-6 rounded-lg mb-8 border border-gray-100">
+                                    <h4 className="font-bold uppercase tracking-wider text-sm mb-4 border-b border-gray-200 pb-2">
+                                        What You Get
+                                    </h4>
+                                    <ul className="space-y-3">
+                                        {course.facilities.map((facility, idx) => (
+                                            <li key={idx} className="flex items-start gap-3 text-sm text-gray-700">
+                                                <div className="mt-0.5 shrink-0 text-gold">
+                                                    {facility.toLowerCase().includes('video') ? <PlayCircle className="w-4 h-4" /> :
+                                                        facility.toLowerCase().includes('resep') ? <FileText className="w-4 h-4" /> :
+                                                            facility.toLowerCase().includes('trouble') ? <Settings className="w-4 h-4" /> :
+                                                                facility.toLowerCase().includes('group') ? <Users className="w-4 h-4" /> :
+                                                                    <Check className="w-4 h-4" />}
+                                                </div>
+                                                <span>{facility}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
