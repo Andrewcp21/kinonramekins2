@@ -482,7 +482,8 @@
       "👩‍🍳 Konsultasi via Group WhatsApp!"
     ],
     "image": "/images/products/OT7.png",
-    "badge": "New"
+    "badge": "New",
+    "bundleWith": { "courseId": "31", "bundlePrice": 275000 }
   },
   {
     "id": "31",
@@ -499,7 +500,8 @@
       "👩‍🍳 Konsultasi via Group WhatsApp!"
     ],
     "image": "/images/products/OT6.png",
-    "badge": "New"
+    "badge": "New",
+    "bundleWith": { "courseId": "32", "bundlePrice": 275000 }
   },
   {
     "id": "29",

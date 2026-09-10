@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
-import { X, Check, MessageCircle, PlayCircle, FileText, Settings, Users, ShoppingCart } from 'lucide-react';
+import { X, Check, MessageCircle, PlayCircle, FileText, Settings, Users, ShoppingCart, Gift } from 'lucide-react';
 import { Course } from '@/types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/components/CartContext';
+import coursesData from '@/data/courses.json';
 
 interface ProductModalProps {
     course: Course | null;
@@ -17,6 +18,12 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
     const modalRef = useRef<HTMLDivElement>(null);
     const { toggleItem, isInCart } = useCart();
     const inCart = course ? isInCart(course.id) : false;
+
+    const partnerCourse = useMemo(() => {
+        if (!course?.bundleWith) return null;
+        const found = coursesData.find(c => c.id === course.bundleWith!.courseId);
+        return found ? (found as Course) : null;
+    }, [course]);
 
     // Close on Escape key
     useEffect(() => {
@@ -80,6 +87,11 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
         return `https://wa.me/6289522453978?text=${encodeURIComponent(message)}`;
     };
 
+    const getBundleWhatsappLink = (course: Course, partner: Course, bundlePrice: number) => {
+        const message = `Halo, saya tertarik dengan paket bundling ${course.name} + ${partner.name} seharga ${formatPrice(bundlePrice)}. Boleh minta info lebih lanjut?`;
+        return `https://wa.me/6289522453978?text=${encodeURIComponent(message)}`;
+    };
+
     const trackLead = (e: React.MouseEvent<HTMLAnchorElement>) => {
         if (!course) return;
         e.preventDefault();
@@ -105,6 +117,38 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
                     price: course.price,
                     quantity: 1,
                 }],
+            });
+        });
+
+        setTimeout(() => {
+            window.open(href, '_blank', 'noopener,noreferrer');
+        }, 300);
+    };
+
+    const trackBundleLead = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (!course || !partnerCourse || !course.bundleWith) return;
+        e.preventDefault();
+        const href = e.currentTarget.href;
+        const bundlePrice = course.bundleWith.bundlePrice;
+
+        import('@/lib/fpixel').then(fpixel => {
+            fpixel.track('Lead', {
+                content_name: `${course.name} + ${partnerCourse.name} (Bundle)`,
+                content_category: course.category,
+                content_ids: [course.id, partnerCourse.id],
+                value: bundlePrice,
+                currency: 'IDR',
+            });
+        });
+
+        import('@/lib/gtag').then(gtag => {
+            gtag.event('generate_lead', {
+                currency: 'IDR',
+                value: bundlePrice,
+                items: [
+                    { item_id: course.id, item_name: course.name, item_category: course.category, price: course.price, quantity: 1 },
+                    { item_id: partnerCourse.id, item_name: partnerCourse.name, item_category: partnerCourse.category, price: partnerCourse.price, quantity: 1 },
+                ],
             });
         });
 
@@ -198,6 +242,55 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
                                         ))}
                                     </ul>
                                 </div>
+
+                                {/* Bundle Deal */}
+                                {course.bundleWith && partnerCourse && (
+                                    <div className="bg-gold/5 p-6 rounded-lg mb-8 border-2 border-gold/30">
+                                        <h4 className="font-bold uppercase tracking-wider text-sm mb-4 flex items-center gap-2">
+                                            <Gift className="w-4 h-4 text-gold" />
+                                            {course.bundleWith.label ?? 'Bundle Deal'}
+                                        </h4>
+
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <div className="relative w-16 h-16 shrink-0 bg-white rounded border border-gray-200 overflow-hidden">
+                                                {partnerCourse.image ? (
+                                                    <Image
+                                                        src={partnerCourse.image}
+                                                        alt={partnerCourse.name}
+                                                        fill
+                                                        className="object-contain p-1"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center text-[10px] text-gray-400">No Image</div>
+                                                )}
+                                            </div>
+                                            <div className="text-sm">
+                                                <p className="text-gray-500">Bundle with</p>
+                                                <p className="font-semibold leading-tight">{partnerCourse.name}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-baseline gap-3 mb-4">
+                                            <span className="text-sm line-through text-gray-400">
+                                                {formatPrice(course.price + partnerCourse.price)}
+                                            </span>
+                                            <span className="text-xl font-bold font-mono text-gold">
+                                                {formatPrice(course.bundleWith.bundlePrice)}
+                                            </span>
+                                        </div>
+
+                                        <a
+                                            href={getBundleWhatsappLink(course, partnerCourse, course.bundleWith.bundlePrice)}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={trackBundleLead}
+                                            className="w-full bg-black text-white font-bold py-3 px-6 flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors uppercase tracking-widest text-xs"
+                                        >
+                                            <MessageCircle className="w-4 h-4" />
+                                            Ambil Paket Bundle via WhatsApp
+                                        </a>
+                                    </div>
+                                )}
                             </div>
                         </div>
 

@@ -8,4 +8,9 @@ export interface Course {
     facilities: string[];
     image: string | null;
     badge: string | null;
+    bundleWith?: {
+        courseId: string;
+        bundlePrice: number;
+        label?: string;
+    };
 }
