@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { Course } from '@/types';
+import { getAppliedBundles, AppliedBundle } from '@/lib/bundle';
 
 interface CartState {
     items: Course[];
@@ -10,6 +11,13 @@ interface CartState {
     toggleItem: (course: Course) => void;
     isInCart: (id: string) => boolean;
     clearCart: () => void;
+    /** Sum of all items at normal price */
+    subtotal: number;
+    /** Bundle deals the cart automatically qualifies for */
+    appliedBundles: AppliedBundle[];
+    /** Total saved through automatic bundle deals */
+    discount: number;
+    /** subtotal - discount */
     total: number;
 }
 
@@ -84,10 +92,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     const clearCart = () => setItems([]);
 
-    const total = items.reduce((sum, i) => sum + i.price, 0);
+    const subtotal = items.reduce((sum, i) => sum + i.price, 0);
+    const appliedBundles = getAppliedBundles(items);
+    const discount = appliedBundles.reduce((sum, b) => sum + b.saving, 0);
+    const total = subtotal - discount;
 
     return (
-        <CartContext.Provider value={{ items, addItem, removeItem, toggleItem, isInCart, clearCart, total }}>
+        <CartContext.Provider value={{ items, addItem, removeItem, toggleItem, isInCart, clearCart, subtotal, appliedBundles, discount, total }}>
             {children}
         </CartContext.Provider>
     );

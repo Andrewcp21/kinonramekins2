@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { ShoppingCart, X, ChevronUp, ChevronDown, MessageCircle } from 'lucide-react';
+import { ShoppingCart, X, ChevronUp, ChevronDown, MessageCircle, Gift } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/components/CartContext';
 
@@ -9,7 +9,7 @@ const formatPrice = (price: number) =>
     new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(price);
 
 export default function CartBar() {
-    const { items, removeItem, total } = useCart();
+    const { items, removeItem, subtotal, appliedBundles, discount, total } = useCart();
     const [expanded, setExpanded] = useState(false);
 
     const handleWhatsApp = () => {
@@ -28,7 +28,15 @@ export default function CartBar() {
             .map((item, idx) => `${idx + 1}. ${item.name} – ${formatPrice(item.price)}`)
             .join('\n');
 
-        const message = `Halo kak, saya mau daftar kelas berikut:\n\n${lines}\n\n*Total: ${formatPrice(total)}*\n\nMohon info selanjutnya ya kak 🙏`;
+        const bundleLines = appliedBundles
+            .map(b => `🎁 ${b.label}: ${b.courses[0].name} + ${b.courses[1].name} → ${formatPrice(b.bundlePrice)} (hemat ${formatPrice(b.saving)})`)
+            .join('\n');
+
+        const summary = discount > 0
+            ? `${bundleLines}\n\nSubtotal: ${formatPrice(subtotal)}\nDiskon bundle: -${formatPrice(discount)}\n*Total: ${formatPrice(total)}*`
+            : `*Total: ${formatPrice(total)}*`;
+
+        const message = `Halo kak, saya mau daftar kelas berikut:\n\n${lines}\n\n${summary}\n\nMohon info selanjutnya ya kak 🙏`;
 
         window.open(`https://wa.me/6289522453978?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
     };
@@ -69,6 +77,34 @@ export default function CartBar() {
                                             </div>
                                         </li>
                                     ))}
+
+                                    {discount > 0 && (
+                                        <>
+                                            {appliedBundles.map(b => (
+                                                <li
+                                                    key={`${b.courses[0].id}-${b.courses[1].id}`}
+                                                    className="flex items-center justify-between text-sm pt-2 border-t border-white/10"
+                                                >
+                                                    <span className="flex items-center gap-2 mr-4 min-w-0 text-[#D4AF37]">
+                                                        <Gift className="w-4 h-4 shrink-0" />
+                                                        <span className="truncate">{b.label}</span>
+                                                    </span>
+                                                    <span className="font-mono text-[#D4AF37] shrink-0">
+                                                        -{formatPrice(b.saving)}
+                                                    </span>
+                                                </li>
+                                            ))}
+                                            <li className="flex items-center justify-between text-sm pt-2 border-t border-white/20 font-semibold">
+                                                <span>Total</span>
+                                                <span className="flex items-baseline gap-2 font-mono">
+                                                    <span className="text-xs line-through text-white/50">
+                                                        {formatPrice(subtotal)}
+                                                    </span>
+                                                    <span className="text-[#D4AF37]">{formatPrice(total)}</span>
+                                                </span>
+                                            </li>
+                                        </>
+                                    )}
                                 </ul>
                             </motion.div>
                         )}
@@ -85,8 +121,19 @@ export default function CartBar() {
                             <ShoppingCart className="w-5 h-5 text-[#D4AF37] shrink-0" />
                             <div className="flex flex-col min-w-0">
                                 <span className="font-semibold text-sm truncate">
-                                    {items.length} kelas dipilih&nbsp;·&nbsp;{formatPrice(total)}
+                                    {items.length} kelas dipilih&nbsp;·&nbsp;
+                                    {discount > 0 && (
+                                        <span className="line-through text-white/50 font-normal mr-1">
+                                            {formatPrice(subtotal)}
+                                        </span>
+                                    )}
+                                    {formatPrice(total)}
                                 </span>
+                                {discount > 0 && (
+                                    <span className="text-[11px] text-[#D4AF37] truncate">
+                                        🎁 Bundle deal otomatis · hemat {formatPrice(discount)}
+                                    </span>
+                                )}
                             </div>
                             {expanded
                                 ? <ChevronDown className="w-4 h-4 ml-auto shrink-0" />
