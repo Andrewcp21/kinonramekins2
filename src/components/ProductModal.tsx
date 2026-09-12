@@ -88,7 +88,14 @@ export default function ProductModal({ course, isOpen, onClose }: ProductModalPr
     };
 
     const getBundleWhatsappLink = (course: Course, partner: Course, bundlePrice: number) => {
-        const message = `Halo, saya tertarik dengan paket bundling ${course.name} + ${partner.name} seharga ${formatPrice(bundlePrice)}. Boleh minta info lebih lanjut?`;
+        const lines = [course, partner]
+            .map((item, idx) => `${idx + 1}. ${item.name} – ${formatPrice(item.price)}`)
+            .join('\n');
+        const subtotal = course.price + partner.price;
+        const discount = subtotal - bundlePrice;
+        const label = course.bundleWith?.label ?? 'Bundle Deal';
+
+        const message = `Halo kak, saya mau daftar kelas berikut:\n\n${lines}\n\n🎁 ${label}: ${course.name} + ${partner.name} → ${formatPrice(bundlePrice)} (hemat ${formatPrice(discount)})\n\nSubtotal: ${formatPrice(subtotal)}\nDiskon bundle: -${formatPrice(discount)}\n*Total: ${formatPrice(bundlePrice)}*\n\nMohon info selanjutnya ya kak 🙏`;
         return `https://wa.me/6289522453978?text=${encodeURIComponent(message)}`;
     };
 
