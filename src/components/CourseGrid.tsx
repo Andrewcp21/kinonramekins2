@@ -9,7 +9,8 @@ import CategoryFilter from './CategoryFilter';
 import ProductModal from './ProductModal';
 import coursesData from '@/data/courses.json';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { Sparkles, ShoppingCart, Check } from 'lucide-react';
+import { useCart } from '@/components/CartContext';
 
 function CourseGridContent() {
     const searchParams = useSearchParams();
@@ -17,9 +18,57 @@ function CourseGridContent() {
     const [activeCategory, setActiveCategory] = useState('Cakes & Desserts');
     const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
+    const { addItem, isInCart } = useCart();
+
     const londonCake = coursesData.find(c => c.id === '32');
+    const matildaCake = coursesData.find(c => c.id === '31');
+
+    // Highlighted bundle — all figures come from courses.json so they stay in sync
+    const bundle = useMemo(() => {
+        if (!londonCake?.bundleWith || !matildaCake) return null;
+        const normalPrice = londonCake.price + matildaCake.price;
+        const bundlePrice = londonCake.bundleWith.bundlePrice;
+        return {
+            courses: [londonCake, matildaCake] as Course[],
+            label: londonCake.bundleWith.label ?? 'Bundle Deal',
+            normalPrice,
+            bundlePrice,
+        };
+    }, [londonCake, matildaCake]);
+
+    const bundleInCart = !!bundle && bundle.courses.every(c => isInCart(c.id));
+
+    const formatPrice = (price: number) =>
+        new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(price);
+
+    const trackPromotion = (creative: string) => {
+        if (!bundle) return;
+        import('@/lib/gtag').then(gtag => {
+            gtag.event('select_promotion', {
+                promotion_id: 'london_matilda_bundle',
+                promotion_name: bundle.label,
+                creative_name: creative,
+                currency: 'IDR',
+                value: bundle.bundlePrice,
+                items: bundle.courses.map(c => ({
+                    item_id: c.id,
+                    item_name: c.name,
+                    item_category: c.category,
+                    price: c.price,
+                    quantity: 1,
+                })),
+            });
+        });
+    };
+
+    const handleAddBundle = () => {
+        if (!bundle || bundleInCart) return;
+        trackPromotion('add_bundle');
+        bundle.courses.forEach(c => addItem(c));
+    };
 
     const handleAnnouncementClick = () => {
+        trackPromotion('view_detail');
         setActiveCategory('Cakes & Desserts');
         if (londonCake) handleSelectCourse(londonCake as Course);
     };
@@ -139,17 +188,84 @@ function CourseGridContent() {
                     Pilihan Kelas
                 </h2>
 
-                <motion.button
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    onClick={handleAnnouncementClick}
-                    className="mt-4 inline-flex items-center gap-2 bg-amber-950 text-amber-50 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-amber-800 transition-colors shadow-md"
-                >
-                    <Sparkles className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                    <span>New Recipe: London Chocolate Cake</span>
-                    <ArrowRight className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                </motion.button>
+                {bundle && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="mt-6 mx-auto max-w-5xl bg-amber-950 text-amber-50 rounded-2xl overflow-hidden shadow-lg text-left flex flex-col sm:flex-row"
+                    >
+                        {/* Images — tap to open details */}
+                        <button
+                            onClick={handleAnnouncementClick}
+                            aria-label={`Lihat detail ${bundle.label}`}
+                            className="relative grid grid-cols-2 gap-1 sm:w-1/2 shrink-0 sm:self-center group"
+                        >
+                            {bundle.courses.map(c => (
+                                <div key={c.id} className="relative aspect-square bg-amber-900/40 overflow-hidden">
+                                    {c.image && (
+                                        <Image
+                                            src={c.image}
+                                            alt={c.name}
+                                            fill
+                                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                            sizes="(max-width: 640px) 50vw, 256px"
+                                        />
+                                    )}
+                                </div>
+                            ))}
+                            {/* Plus badge on the seam */}
+                            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-amber-400 text-amber-950 font-bold text-lg flex items-center justify-center shadow-md">
+                                +
+                            </span>
+                        </button>
+
+                        {/* Content */}
+                        <div className="p-5 md:p-6 flex flex-col justify-center gap-3 min-w-0">
+                            <div className="flex items-center gap-2">
+                                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                                <span className="text-[11px] md:text-xs font-bold uppercase tracking-widest text-amber-400">
+                                    {bundle.label}
+                                </span>
+                            </div>
+
+                            <p className="text-sm md:text-base font-semibold leading-snug">
+                                {bundle.courses.map(c => c.name).join(' + ')}
+                            </p>
+
+                            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                                <span className="text-sm line-through text-amber-200/60">
+                                    {formatPrice(bundle.normalPrice)}
+                                </span>
+                                <span className="text-2xl md:text-3xl font-bold text-amber-300">
+                                    {formatPrice(bundle.bundlePrice)}
+                                </span>
+                            </div>
+
+                            <button
+                                onClick={handleAddBundle}
+                                disabled={bundleInCart}
+                                className={`mt-1 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-bold transition-colors ${
+                                    bundleInCart
+                                        ? 'bg-amber-900/60 text-amber-200 cursor-default'
+                                        : 'bg-amber-400 text-amber-950 hover:bg-amber-300 active:scale-[0.98]'
+                                }`}
+                            >
+                                {bundleInCart ? (
+                                    <>
+                                        <Check className="w-4 h-4" />
+                                        Paket Ada di Keranjang
+                                    </>
+                                ) : (
+                                    <>
+                                        <ShoppingCart className="w-4 h-4" />
+                                        Ambil Paket Bundle
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    </motion.div>
+                )}
             </div>
 
             <CategoryFilter
