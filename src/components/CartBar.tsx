@@ -1,15 +1,17 @@
 "use client";
 
 import { useState } from 'react';
-import { ShoppingCart, X, ChevronUp, ChevronDown, MessageCircle, Gift } from 'lucide-react';
+import { ShoppingCart, X, ChevronUp, ChevronDown, MessageCircle, Gift, Tag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/components/CartContext';
+import { PAYDAY_RATE } from '@/lib/promo';
 
 const formatPrice = (price: number) =>
     new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(price);
 
 export default function CartBar() {
-    const { items, removeItem, subtotal, appliedBundles, discount, total } = useCart();
+    const { items, removeItem, subtotal, appliedBundles, appliedPromo, discount, total } = useCart();
+    const paydayLabel = `Payday Sale ${PAYDAY_RATE * 100}%`;
     const [expanded, setExpanded] = useState(false);
 
     const handleWhatsApp = () => {
@@ -32,9 +34,11 @@ export default function CartBar() {
             .map(b => `🎁 ${b.label}: ${b.courses[0].name} + ${b.courses[1].name} → ${formatPrice(b.bundlePrice)} (hemat ${formatPrice(b.saving)})`)
             .join('\n');
 
-        const summary = discount > 0
+        const summary = appliedPromo === 'bundle'
             ? `${bundleLines}\n\nSubtotal: ${formatPrice(subtotal)}\nDiskon bundle: -${formatPrice(discount)}\n*Total: ${formatPrice(total)}*`
-            : `*Total: ${formatPrice(total)}*`;
+            : appliedPromo === 'payday'
+                ? `Subtotal: ${formatPrice(subtotal)}\nDiskon ${paydayLabel}: -${formatPrice(discount)}\n*Total: ${formatPrice(total)}*`
+                : `*Total: ${formatPrice(total)}*`;
 
         const message = `Halo kak, saya mau daftar kelas berikut:\n\n${lines}\n\n${summary}\n\nMohon info selanjutnya ya kak 🙏`;
 
@@ -80,7 +84,18 @@ export default function CartBar() {
 
                                     {discount > 0 && (
                                         <>
-                                            {appliedBundles.map(b => (
+                                            {appliedPromo === 'payday' && (
+                                                <li className="flex items-center justify-between text-sm pt-2 border-t border-white/10">
+                                                    <span className="flex items-center gap-2 mr-4 min-w-0 text-[#D4AF37]">
+                                                        <Tag className="w-4 h-4 shrink-0" />
+                                                        <span className="truncate">{paydayLabel}</span>
+                                                    </span>
+                                                    <span className="font-mono text-[#D4AF37] shrink-0">
+                                                        -{formatPrice(discount)}
+                                                    </span>
+                                                </li>
+                                            )}
+                                            {appliedPromo === 'bundle' && appliedBundles.map(b => (
                                                 <li
                                                     key={`${b.courses[0].id}-${b.courses[1].id}`}
                                                     className="flex items-center justify-between text-sm pt-2 border-t border-white/10"
@@ -131,7 +146,9 @@ export default function CartBar() {
                                 </span>
                                 {discount > 0 && (
                                     <span className="text-[11px] text-[#D4AF37] truncate">
-                                        🎁 Bundle deal otomatis · hemat {formatPrice(discount)}
+                                        {appliedPromo === 'payday'
+                                            ? `🏷️ ${paydayLabel} aktif · hemat ${formatPrice(discount)}`
+                                            : `🎁 Bundle deal otomatis · hemat ${formatPrice(discount)}`}
                                     </span>
                                 )}
                             </div>

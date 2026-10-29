@@ -3,6 +3,10 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { Course } from '@/types';
 import { getAppliedBundles, AppliedBundle } from '@/lib/bundle';
+import { usePaydayActive, PAYDAY_MIN_PURCHASE, PAYDAY_RATE } from '@/lib/promo';
+
+/** Which discount is applied to the cart. Promos don't stack — the bigger one wins. */
+export type AppliedPromo = 'bundle' | 'payday' | null;
 
 interface CartState {
     items: Course[];
@@ -13,9 +17,13 @@ interface CartState {
     clearCart: () => void;
     /** Sum of all items at normal price */
     subtotal: number;
-    /** Bundle deals the cart automatically qualifies for */
+    /** Bundle deals the cart qualifies for (only discounted when appliedPromo is 'bundle') */
     appliedBundles: AppliedBundle[];
-    /** Total saved through automatic bundle deals */
+    /** Whether the Payday Sale is still running */
+    paydayActive: boolean;
+    /** Which discount is applied */
+    appliedPromo: AppliedPromo;
+    /** Total saved through the applied discount */
     discount: number;
     /** subtotal - discount */
     total: number;
@@ -94,11 +102,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     const subtotal = items.reduce((sum, i) => sum + i.price, 0);
     const appliedBundles = getAppliedBundles(items);
-    const discount = appliedBundles.reduce((sum, b) => sum + b.saving, 0);
+    const bundleSaving = appliedBundles.reduce((sum, b) => sum + b.saving, 0);
+
+    const paydayActive = usePaydayActive();
+    const paydaySaving = paydayActive && subtotal >= PAYDAY_MIN_PURCHASE
+        ? Math.round(subtotal * PAYDAY_RATE)
+        : 0;
+
+    const appliedPromo: AppliedPromo =
+        paydaySaving > bundleSaving ? 'payday' : bundleSaving > 0 ? 'bundle' : null;
+    const discount = appliedPromo === 'payday' ? paydaySaving : bundleSaving;
     const total = subtotal - discount;
 
     return (
-        <CartContext.Provider value={{ items, addItem, removeItem, toggleItem, isInCart, clearCart, subtotal, appliedBundles, discount, total }}>
+        <CartContext.Provider value={{ items, addItem, removeItem, toggleItem, isInCart, clearCart, subtotal, appliedBundles, paydayActive, appliedPromo, discount, total }}>
             {children}
         </CartContext.Provider>
     );
