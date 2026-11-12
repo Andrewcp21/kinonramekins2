@@ -13,4 +13,11 @@ export interface Course {
         bundlePrice: number;
         label?: string;
     };
+    /** Featured in the "Cocok untuk Pemula" highlight on the homepage */
+    beginnerPick?: {
+        /** Position in the highlight, lowest first */
+        order: number;
+        /** Short display name for the compact tile */
+        shortName?: string;
+    };
 }

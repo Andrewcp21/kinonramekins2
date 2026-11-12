@@ -31,7 +31,11 @@
       "👩‍🍳 Konsultasi via Group WhatsApp!"
     ],
     "image": "/images/products/C2.png",
-    "badge": "Best Seller"
+    "badge": "Best Seller",
+    "beginnerPick": {
+      "order": 2,
+      "shortName": "Levain Cookies"
+    }
   },
   {
     "id": "3",
@@ -340,7 +344,11 @@
       "👩‍🍳 Konsultasi via Group WhatsApp!"
     ],
     "image": "/images/products/BR2.png",
-    "badge": null
+    "badge": null,
+    "beginnerPick": {
+      "order": 3,
+      "shortName": "Milk Bread 101"
+    }
   },
   {
     "id": "21",
@@ -519,7 +527,11 @@
       "👩‍🍳 Konsultasi via Group WhatsApp!"
     ],
     "image": "/images/products/OT4.png",
-    "badge": null
+    "badge": null,
+    "beginnerPick": {
+      "order": 1,
+      "shortName": "Basque Cheesecake"
+    }
   },
   {
     "id": "30",

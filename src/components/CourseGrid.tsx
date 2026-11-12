@@ -9,7 +9,7 @@ import CategoryFilter from './CategoryFilter';
 import ProductModal from './ProductModal';
 import coursesData from '@/data/courses.json';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ShoppingCart, Check } from 'lucide-react';
+import { Sparkles, ShoppingCart, Check, Sprout } from 'lucide-react';
 import { useCart } from '@/components/CartContext';
 
 function CourseGridContent() {
@@ -71,6 +71,36 @@ function CourseGridContent() {
         trackPromotion('view_detail');
         setActiveCategory('Cakes & Desserts');
         if (londonCake) handleSelectCourse(londonCake as Course);
+    };
+
+    // Beginner-friendly picks — flagged via `beginnerPick` in courses.json
+    const beginnerPicks = useMemo(
+        () =>
+            (coursesData as Course[])
+                .filter(c => c.beginnerPick)
+                .sort((a, b) => a.beginnerPick!.order - b.beginnerPick!.order),
+        []
+    );
+
+    const handleBeginnerPickClick = (course: Course) => {
+        import('@/lib/gtag').then(gtag => {
+            gtag.event('select_promotion', {
+                promotion_id: 'beginner_picks',
+                promotion_name: 'Cocok untuk Pemula',
+                creative_name: 'view_detail',
+                currency: 'IDR',
+                value: course.price,
+                items: [{
+                    item_id: course.id,
+                    item_name: course.name,
+                    item_category: course.category,
+                    price: course.price,
+                    quantity: 1,
+                }],
+            });
+        });
+        setActiveCategory(course.category);
+        setSelectedCourse(course);
     };
 
     const categories = useMemo(() => {
@@ -266,6 +296,56 @@ function CourseGridContent() {
                         </div>
                     </motion.div>
                 )}
+
+                {beginnerPicks.length > 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className="mt-4 mx-auto max-w-5xl bg-amber-50 border border-amber-200 text-amber-950 rounded-2xl p-4 md:p-6 text-left md:flex md:items-center md:gap-6"
+                    >
+                        <div className="md:w-52 md:shrink-0">
+                            <div className="flex items-center gap-2">
+                                <Sprout className="w-4 h-4 text-amber-700 shrink-0" />
+                                <span className="text-[11px] md:text-xs font-bold uppercase tracking-widest text-amber-700">
+                                    Cocok untuk Pemula
+                                </span>
+                            </div>
+                            <p className="mt-1 text-sm md:text-base font-semibold leading-snug">
+                                Baru mulai baking? Mulai dari sini.
+                            </p>
+                        </div>
+
+                        <div className="mt-4 md:mt-0 md:flex-1 grid grid-cols-3 gap-2 sm:gap-4">
+                            {beginnerPicks.map(c => (
+                                <button
+                                    key={c.id}
+                                    onClick={() => handleBeginnerPickClick(c)}
+                                    aria-label={`Lihat detail ${c.name}`}
+                                    className="group min-w-0 flex flex-col items-stretch justify-start text-left rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700"
+                                >
+                                    <div className="relative aspect-square rounded-xl overflow-hidden bg-amber-100">
+                                        {c.image && (
+                                            <Image
+                                                src={c.image}
+                                                alt={c.name}
+                                                fill
+                                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                                sizes="(max-width: 640px) 33vw, 320px"
+                                            />
+                                        )}
+                                    </div>
+                                    <p className="mt-2 text-xs sm:text-sm md:text-base font-semibold leading-tight group-hover:text-amber-700 transition-colors">
+                                        {c.beginnerPick?.shortName ?? c.name}
+                                    </p>
+                                    <p className="mt-0.5 text-xs sm:text-sm text-amber-900/70">
+                                        {formatPrice(c.price)}
+                                    </p>
+                                </button>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
             </div>
 
             <CategoryFilter
@@ -276,7 +356,7 @@ function CourseGridContent() {
 
             <motion.div
                 layout
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+                className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-8"
             >
                 <AnimatePresence mode="popLayout">
                     {filteredCourses.map((course) => (
