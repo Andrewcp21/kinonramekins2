@@ -7,23 +7,28 @@ import { event as gaEvent } from '@/lib/gtag';
 const favorites = [
     {
         title: "Basque Cheesecake",
-        video: "/videos/OT4-C.MOV",
+        video: "/videos/basque-cheesecake.mp4",
+        poster: "/videos/basque-cheesecake.jpg",
     },
     {
         title: "Tiramisu",
-        video: "/videos/OT5-N.MOV",
+        video: "/videos/tiramisu.mp4",
+        poster: "/videos/tiramisu.jpg",
     },
     {
         title: "OG Brown Butter Chocolate Chunk Cookie",
-        video: "/videos/C3-A.MOV",
+        video: "/videos/brown-butter-cookie.mp4",
+        poster: "/videos/brown-butter-cookie.jpg",
     },
     {
         title: "Crunchy Bite-Sized Chocolate Chip Cookies",
-        video: "/videos/C4.MOV",
+        video: "/videos/crunchy-cookies.mp4",
+        poster: "/videos/crunchy-cookies.jpg",
     },
     {
         title: "Levain Bakery Style Cookie",
-        video: "/videos/C2.mov",
+        video: "/videos/levain-cookie.mp4",
+        poster: "/videos/levain-cookie.jpg",
     }
 ];
 
@@ -66,6 +71,7 @@ function VideoItem({ item, index }: { item: typeof favorites[0], index: number }
                 <video
                     ref={videoRef}
                     src={isInView ? item.video : undefined}
+                    poster={item.poster}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     autoPlay
                     muted
